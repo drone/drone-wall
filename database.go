@@ -16,7 +16,7 @@ c.status, c.started, c.finished, c.duration, c.hash, c.branch, c.pull_request,
 c.author, c.gravatar, c.timestamp, c.message, c.created, c.updated
 FROM repos r, commits c
 WHERE r.id = c.repo_id
-%s
+AND r.slug IN (%s)
 ORDER BY c.created desc
 LIMIT 20
 `
@@ -36,8 +36,12 @@ func setupCommitQuery() {
 	}
 
 	var params bytes.Buffer
-	for _ = range repoList {
-		params.WriteString(fmt.Sprintf("OR repo_id = ?\n"))
+    for i := range repoList {
+        if i < len(repoList) - 1 {
+            params.WriteString(fmt.Sprintf("?, "))
+        } else {
+            params.WriteString(fmt.Sprintf("?"))
+        }
 	}
 
 	commitRecentStmt = fmt.Sprintf(commitRecentTemplate, params.String())
@@ -45,6 +49,7 @@ func setupCommitQuery() {
 
 func listWallCommits() ([]*RepoCommit, error) {
 	var commits []*RepoCommit
+    fmt.Println(commitRecentStmt)
 	err := meddler.QueryAll(db, &commits, commitRecentStmt, repoList...)
 	return commits, err
 }
