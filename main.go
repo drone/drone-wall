@@ -26,12 +26,12 @@ var (
 func wall(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "text/html; charset=utf-8")
 
-    err := wallTemplate.ExecuteTemplate(w, "_", nil)
+	err := wallTemplate.ExecuteTemplate(w, "_", nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
-    return
+	return
 }
 
 // API endpoint for fetching the initial wall display data via AJAX
@@ -40,17 +40,17 @@ func wallData(w http.ResponseWriter, r *http.Request) {
 	commits, err := listWallCommits()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
+		return
 	}
 
 	w.WriteHeader(http.StatusOK)
 
-    err = json.NewEncoder(w).Encode(commits)
+	err = json.NewEncoder(w).Encode(commits)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
-    return
+	return
 }
 
 func setupStatic() {

@@ -28,7 +28,7 @@ var (
 )
 
 func setupCommitQuery() {
-    list := strings.Split(*repos, ",")
+	list := strings.Split(*repos, ",")
 
 	repoList = make([]interface{}, len(list))
 	for i, v := range list {
@@ -36,12 +36,12 @@ func setupCommitQuery() {
 	}
 
 	var params bytes.Buffer
-    for i := range repoList {
-        if i < len(repoList) - 1 {
-            params.WriteString(fmt.Sprintf("?, "))
-        } else {
-            params.WriteString(fmt.Sprintf("?"))
-        }
+	for i := range repoList {
+		if i < len(repoList)-1 {
+			params.WriteString(fmt.Sprintf("?, "))
+		} else {
+			params.WriteString(fmt.Sprintf("?"))
+		}
 	}
 
 	commitRecentStmt = fmt.Sprintf(commitRecentTemplate, params.String())
@@ -49,7 +49,6 @@ func setupCommitQuery() {
 
 func listWallCommits() ([]*RepoCommit, error) {
 	var commits []*RepoCommit
-    fmt.Println(commitRecentStmt)
 	err := meddler.QueryAll(db, &commits, commitRecentStmt, repoList...)
 	return commits, err
 }
