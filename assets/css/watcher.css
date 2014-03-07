@@ -70,7 +70,7 @@ main > ul > li {
 	border-radius: 10px 0px 0px 10px;
 	text-align: center;
 	line-height: 225px;
-	font-size: 210px;
+	font-size: 190px;
 	text-shadow: -1px -1px 1px #000000,
 	              1px  1px 0px #AAAAAA;
 	color: #222222;	
@@ -112,7 +112,7 @@ main > ul > li {
 	width: 50px;
 	line-height: 53px;
 	text-align: center;
-	font-size: 30px;
+	font-size: 26px;
 	color: #EEEEEE;	
 }
 
