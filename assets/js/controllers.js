@@ -6,78 +6,71 @@ var ctlMod = angular.module( "drone.controllers", [] );
 
 ctlMod.controller( "Projects", [ "$scope", "$rootScope", "$http", function ( $scope, $rootScope, $http )
 {
-	var url = "/refresh"
-
 	$scope.projects = [];
-	$scope.firstRun = true;
 
-	var refresh = function() {
+	$scope.addBuild = function ( newBuild )
+	{
+		$scope.currentProject = '';
+		
+		for( var j = 0; j < $scope.projects.length; j++ )
+		{
+			if( $scope.projects[j].projectOwner == newBuild.owner && $scope.projects[j].projectName == newBuild.name )
+			{
+				$scope.currentProject = $scope.projects[j];
+				break;
+			}
+		}
+		
+		if( !$scope.currentProject )
+		{
+			$scope.currentProject = {};
+			$scope.currentProject.projectOwner = newBuild.owner;
+			$scope.currentProject.projectName  = newBuild.name;
+			$scope.currentProject.builds	   = [];
+			
+			$scope.projects.push( $scope.currentProject );
+			$scope.currentProject = $scope.projects[ $scope.projects.length - 1 ];
+		}
+
+		$scope.build = {};
+		$scope.build.fresh = true;
+		
+		for( var k = 0; k < $scope.currentProject.builds.length; k++ )
+		{
+			if( $scope.currentProject.builds[k].hash == newBuild.hash )
+			{
+				$scope.build	   = $scope.currentProject.builds[k];
+				$scope.build.fresh = false;
+				break;
+			}
+		}
+		
+		$scope.build.hash      = newBuild.hash;
+		$scope.build.status    = newBuild.status;
+		$scope.build.buildTime = newBuild.created;
+		$scope.build.pull      = newBuild.pull_request;
+		$scope.build.gravatar  = newBuild.gravatar;
+		$scope.build.message   = newBuild.message;
+		
+		$scope.currentProject.masterHash   = !$scope.build.pull ? $scope.build.hash : $scope.currentProject.masterHash;
+		$scope.currentProject.masterStatus = !$scope.build.pull ? $scope.build.status : $scope.currentProject.masterStatus;
+		
+		if( $scope.build.fresh )
+		{
+			$scope.currentProject.builds.push( $scope.build );
+		}
+	};
+			
+	$scope.refreshWall = function()
+	{
+		var url = "/refresh";
+
 		$http.get( url ).success( function ( result )
 		{
-			var currentProject, build;
-
-			$scope.addBuild = function ( newBuild )
-			{
-				currentProject = '';
-				
-				for( var j = 0; j < $scope.projects.length; j++ )
-				{
-					if( $scope.projects[j].projectOwner == newBuild.owner && $scope.projects[j].projectName == newBuild.name )
-					{
-						currentProject = $scope.projects[j];
-						break;
-					}
-				}
-				
-				if( !currentProject )
-				{
-					currentProject = {};
-					currentProject.projectOwner = newBuild.owner;
-					currentProject.projectName  = newBuild.name;
-					currentProject.builds	   = [];
-					
-					$scope.projects.push( currentProject );
-					currentProject = $scope.projects[ $scope.projects.length - 1 ];
-				}
-		
-				build = {};
-				build.fresh = true;
-				
-				for( var k = 0; k < currentProject.builds.length; k++ )
-				{
-					if( currentProject.builds[k].hash == newBuild.hash )
-					{
-						build	   = currentProject.builds[k];
-						build.fresh = false;
-						break;
-					}
-				}
-				
-				build.hash	  = newBuild.hash;
-				build.status	= newBuild.status;
-				build.buildTime = newBuild.created;
-				build.pull	  = newBuild.pull_request;
-				build.gravatar  = newBuild.gravatar;
-				build.message   = newBuild.message;
-				
-				currentProject.masterHash   = !build.pull && ( ( $scope.firstRun && !currentProject.masterHash ) || !$scope.firstRun )
-											  ? build.hash : currentProject.masterHash;
-				currentProject.masterStatus = !build.pull && ( ( $scope.firstRun && !currentProject.masterStatus ) || !$scope.firstRun )
-											  ? build.status : currentProject.masterStatus;
-				
-				if( build.fresh )
-				{
-					currentProject.builds.push( build );
-					console.log($scope.projects);
-				}
-			};
-			
 			for( var i = 0; i < result.length; i++ )
 			{
 				$scope.addBuild( result[i] );
 			}
-			
-			$scope.firstRun = false;
 			
 		} ).error( function ()
 		{
@@ -85,6 +78,7 @@ ctlMod.controller( "Projects", [ "$scope", "$rootScope", "$http", function ( $sc
 		} )
 	}
 
-	refresh();
-	setInterval(refresh, 5000);
+	$scope.refreshWall();
+	setInterval( $scope.refreshWall, 5000 );
+	
 } ] );
