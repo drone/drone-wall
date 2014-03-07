@@ -67,7 +67,7 @@ ctlMod.controller( "Projects", [ "$scope", "$rootScope", "$http", function ( $sc
 
 		$http.get( url ).success( function ( result )
 		{
-			for( var i = 0; i < result.length; i++ )
+			for( var i = ( result.length - 1 ); i >= 0; i-- )
 			{
 				$scope.addBuild( result[i] );
 			}
