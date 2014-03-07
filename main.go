@@ -72,15 +72,13 @@ func setupTemplate() {
 	wallTemplate = template.Must(template.New("_").Parse(page))
 }
 
-func init() {
+func main() {
 	flag.Parse()
 
 	setupCommitQuery()
 	setupStatic()
 	setupTemplate()
-}
 
-func main() {
 	meddler.Default = meddler.SQLite
 
 	var err error
