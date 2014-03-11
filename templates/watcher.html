@@ -39,6 +39,7 @@
 									<span ng-if="build.status == 'Success'"><i class="fa fa-leaf"></i></span>
 									<span ng-if="build.status == 'Failure'"><i class="fa fa-fire"></i></span>
 									<span ng-if="build.status == 'Started'"><i class="fa fa-refresh fa-spin"></i></span>
+									<span ng-if="build.status == ''"><i class="fa fa-refresh"></i></span>
 									<img x-ng-src="https://gravatar.com/avatar/[[ build.gravatar ]]">
 									[[ build.pull ? 'Pull Request #' + build.pull : build.message ]]
 								</div>
