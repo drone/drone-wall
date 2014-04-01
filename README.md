@@ -1,6 +1,8 @@
 Drone-wall
 ==========
 
+`drone-wall` is a wall display component for the [Drone CI server](https://github.com/drone/drone)
+
 ![alt text](https://camo.githubusercontent.com/8fe545fe1a31ff6948059cbc55f87997382c4a7b/687474703a2f2f692e696d6775722e636f6d2f517342773756342e706e67 "Wall display")
 
 ## Build instructions
