@@ -21,25 +21,13 @@ ORDER BY c.created desc
 LIMIT 20
 `
 
-const teamCommitRecentStmt = `
-SELECT r.slug, r.host, r.owner, r.name,
-c.status, c.started, c.finished, c.duration, c.hash, c.branch, c.pull_request,
-c.author, c.gravatar, c.timestamp, c.message, c.created, c.updated
-FROM repos r, commits c
-WHERE r.team_id = ?
-AND   r.id = c.repo_id
-AND   c.status IN ('Success', 'Failure')
-ORDER BY c.created desc
-LIMIT 10
-`
-
 var (
-	db          *sql.DB
-	repoList    []interface{}
-	commitsStmt string
+	db               *sql.DB
+	repoList         []interface{}
+	commitRecentStmt string
 )
 
-func reposQuery() string {
+func setupCommitQuery() {
 	list := strings.Split(*repos, ",")
 
 	repoList = make([]interface{}, len(list))
@@ -56,19 +44,11 @@ func reposQuery() string {
 		}
 	}
 
-	return fmt.Sprintf(commitRecentTemplate, params.String())
+	commitRecentStmt = fmt.Sprintf(commitRecentTemplate, params.String())
 }
 
 func listWallCommits() ([]*RepoCommit, error) {
 	var commits []*RepoCommit
-    var err error
-
-	if *teams != "" {
-        err = meddler.QueryAll(db, &commits, teamCommitRecentStmt, *team)
-	} else if *repos != "" {
-        commits := setupReposQuery()
-        err = meddler.QueryAll(db, &commits, commits, repoList...)
-	}
-
+	err := meddler.QueryAll(db, &commits, commitRecentStmt, repoList...)
 	return commits, err
 }
