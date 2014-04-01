@@ -14,7 +14,6 @@ import (
 
 var (
 	repos      = flag.String("repos", "", "Comma-delimited list of repos to watch")
-    team       = flag.String("team", "", "Team repositories to watch")
 	port       = flag.String("port", ":8080", "")
 	refresh    = flag.Int("refresh", 10, "Refresh interval")
 	driver     = flag.String("driver", "sqlite3", "")
@@ -76,6 +75,7 @@ func setupTemplate() {
 func main() {
 	flag.Parse()
 
+	setupCommitQuery()
 	setupStatic()
 	setupTemplate()
 
