@@ -16,6 +16,7 @@ From your GOPATH:
 ## Commandline options
 
 `--repos`: Comma-delimited list of repositories. This is generally the Github or Bitbucket path.
+`--team`: Team slug for a team you want to watch. Setting this will override the repos setting.
 `--datasource`: Specifies the location of your `drone.sqlite` file
 `--port`: Port to listen on (i.e. `--port=:8080`)
 

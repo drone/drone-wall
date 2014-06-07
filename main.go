@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"flag"
 	"github.com/GeertJohan/go.rice"
+	. "github.com/drone/drone/pkg/model"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/russross/meddler"
 	"html/template"
@@ -14,6 +15,7 @@ import (
 
 var (
 	repos      = flag.String("repos", "", "Comma-delimited list of repos to watch")
+	team       = flag.String("team", "", "Team slug to watch")
 	port       = flag.String("port", ":8080", "")
 	refresh    = flag.Int("refresh", 10, "Refresh interval")
 	driver     = flag.String("driver", "sqlite3", "")
@@ -36,8 +38,19 @@ func wall(w http.ResponseWriter, r *http.Request) {
 
 // API endpoint for fetching the initial wall display data via AJAX
 func wallData(w http.ResponseWriter, r *http.Request) {
-	// list of recent commits
-	commits, err := listWallCommits()
+	var commits []*RepoCommit
+	var err error
+
+	if *team != "" {
+		log.Println("teams")
+		// list of recent team commits
+		commits, err = listTeamWallCommits()
+	} else {
+		log.Println("repos")
+		// list of recent commits
+		commits, err = listRepoWallCommits()
+	}
+
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -75,7 +88,6 @@ func setupTemplate() {
 func main() {
 	flag.Parse()
 
-	setupCommitQuery()
 	setupStatic()
 	setupTemplate()
 
