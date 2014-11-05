@@ -1,6 +1,10 @@
 drone-wall
 ==========
 
+`drone-wall` is a wall display component for the [Drone CI server](https://github.com/drone/drone)
+
+![alt text](http://tathanen.github.io/drone-wall.jpg "Wall display")
+
 ### Deployment
 
     $ docker run -p 3000:3000 -e API_SCHEME=$API_SCHEME -e API_DOMAIN=$API_DOMAIN \
