@@ -1,0 +1,129 @@
+<section>
+
+    <h1>Watching since <span data-ng-bind="watchTime | moment: 'dddd, MMMM Do [at] h:mm a': true">...</span></h1>
+
+    <div class="theme">
+        <a data-ng-click="toggleTheme( 'light' )" class="theme-light">light</a>
+        <a data-ng-click="toggleTheme( 'dark' )" class="theme-dark">dark</a>
+    </div>
+
+    <div class="column">
+
+        <ul class="repos">
+
+            <li data-ng-repeat="repo in displayRepos" class="[[ repo.status ]]" data-scroll-repo>
+
+                <div class="author">
+                    <img data-ng-src="[[ gravatarPrefix + repo.gravatar ]]?s=100" data-ng-if="repo.gravatar">
+                    <span class="no-author" data-ng-if="!repo.gravatar"><i class="fa fa-user" data-ng-if="repo.lastMerge"></i></span>
+                    <i class="fa fa-circle-o-notch fa-spin" data-ng-if="repo.status == 'Started'"></i>
+                </div>
+
+                <ul class="pull-requests">
+                    <li data-ng-repeat="pull in repo.pulls | filter: { merging: false }" class="[[ pull.status ]]">
+                        <div class="pull-author">
+                            <img data-ng-src="[[ gravatarPrefix + pull.gravatar ]]?s=100" data-ng-if="pull.gravatar">
+                            <span class="no-author" data-ng-if="!pull.gravatar"><i class="fa fa-user"></i></span>
+                            <i class="fa fa-circle-o-notch fa-spin" data-ng-if="pull.status == 'Started'"></i>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="repo-name">[[ repo.name ]]</div>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+<section>
+
+    <section class="last-failure">
+
+        <h1 data-ng-if="!failDate"><span class="good">No failed builds</span> this week.</h1>
+        <h1 data-ng-if="failDate"><span class="wide">It's been </span><span class="bad">[[ failDate | from:now ]]</span> since the last failed build<span class="wide">.</span></h1>
+
+    </section>
+
+    <section class="build-health">
+
+        <h1 class="bar">This Week's Build Health</h1>
+
+        <span class="no-builds" data-ng-if="buildCount === 0">Waiting for builds.</span>
+
+        <div class="build-count" data-ng-if="buildCount > 0">
+            <h2>Builds</h2>
+            <div class="count">[[ buildCount ]]</div>
+        </div>
+
+        <div class="pull-count" data-ng-if="buildCount > 0">
+            <h2>Pulls</h2>
+            <div class="count">[[ pullCount ]]</div>
+        </div>
+
+        <div class="success-fail" data-ng-if="buildCount > 0">
+            <h2>Successes</h2>
+            <h2>Failures</h2>
+            <div class="build-bar">
+                <div class="success" data-ng-class="{ zero: successCount === 0 }">[[ successCount ]]</div>
+                <div class="failure" data-ng-class="{ zero: failureCount === 0 }" style="width: [[ ( failureCount / ( successCount + failureCount ) ) * 100 ]]%"><span>[[ failureCount ]]</span></div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="build-leaders">
+
+        <h1 class="bar">This Week's Build Leaders</h1>
+
+        <span class="no-builds" data-ng-if="( developers | filter: { visible: true } ).length === 0">Waiting for builders (w/Gravatars).</span>
+
+        <ol data-ng-if="( developers | filter: { visible: true } ).length > 0">
+
+            <li data-ng-repeat="developer in developers | filter: { visible: true } | orderBy: 'builds' : true | limitTo: maxLeaders" data-ng-style="{ width: ( 100 / maxLeaders ) + '%' }">
+
+                <div class="container">
+                    <div class="developer">
+                        <img data-ng-src="[[ gravatarPrefix + developer.gravatar ]]?s=100" class="builder">
+                    </div>
+                    <span data-ng-class="{ successes: developer.successes > 0 }">[[ developer.successes ]]</span>
+                    <span data-ng-class="{ failures: developer.failures > 0 }">[[ developer.failures ]]</span>
+                </div>
+
+            </li>
+
+        </ol>
+
+    </section>
+
+    <section class="latest-builds">
+
+        <h1 class="bar">Latest Builds</h1>
+
+        <span class="no-builds" data-ng-if="builds.length === 0">Waiting for builds.</span>
+
+        <ol data-ng-if="builds.length > 0">
+
+            <li class="[[ build.status ]]" data-ng-repeat="build in builds | orderBy: 'created_at': true | limitTo: maxBuilds">
+
+                <div class="author">
+                    <img data-ng-src="[[ gravatarPrefix + build.gravatar ]]?s=100" data-ng-if="build.gravatar">
+                    <span class="no-author" data-ng-if="!build.gravatar"><i class="fa fa-user"></i></span>
+                    <i class="fa fa-circle-o-notch fa-spin" data-ng-if="build.status == 'Started'"></i>
+                </div>
+                <div class="name">[[ build.name ]]</div>
+                <div class="message">[[ build.message ]]</div>
+                <div class="when" data-ng-if="build.status != 'Pending'">[[ build.started_at * 1000 | from:now ]] ago</div>
+                <div class="when" data-ng-if="build.status == 'Pending'">Build Pending</div>
+                <div class="duration" data-ng-if="build.duration > 0">~ [[ build.duration | duration ]]</div>
+
+            </li>
+
+        </ol>
+
+    </section>
+
+</section>
