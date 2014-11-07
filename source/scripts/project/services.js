@@ -81,7 +81,8 @@ angular.module( "wall.services", [] )
                         {
                             currentRepo.pulls[ pullIndex ].merging = true;
                         }
-                        else if( build.status == "Success" || build.status == "Failure" || build.status == "Error" )
+                        else if( build.status == "Success" || build.status == "Failure" ||
+                                 build.status == "Error" || build.status == "Killed" )
                         {
                             currentRepo.pulls.splice( pullIndex, 1 );
                         }
@@ -197,7 +198,7 @@ angular.module( "wall.services", [] )
             {
                 $rootScope.$broadcast( "buildSuccess", currentBuild );
             }
-            else if( currentBuild.status == "Failure" || currentBuild.status == "Error" )
+            else if( currentBuild.status == "Failure" || currentBuild.status == "Error" || currentBuild.status == "Killed" )
             {
                 $rootScope.$broadcast( "buildFailure", currentBuild );
             }
@@ -259,7 +260,7 @@ angular.module( "wall.services", [] )
                     currentDeveloper.successes++;
                     currentDeveloper.visible = true;
                 }
-                else if( build.status == "Failure" || build.status == "Error" )
+                else if( build.status == "Failure" || build.status == "Error" || build.status == "Killed" )
                 {
                     currentDeveloper.builds++;
                     currentDeveloper.failures++;
