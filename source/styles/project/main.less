@@ -205,6 +205,7 @@ main > section:first-child > h1 {
 .repos > li.Started .repo-name,
 .repos > li.Success .repo-name,
 .repos > li.Error .repo-name,
+.repos > li.Killed .repo-name,
 .repos > li.Failure .repo-name { text-shadow: -2px 2px 4px rgba(0,0,0,.4); }
 
 .repos > li .pull-requests {
@@ -306,6 +307,9 @@ main > section:first-child > h1 {
 .repos > li .pull-requests > li.Error,
 .repos > li .pull-requests > li.Error:before,
 .repos > li .pull-requests > li.Error .pull-author,
+.repos > li .pull-requests > li.Killed,
+.repos > li .pull-requests > li.Killed:before,
+.repos > li .pull-requests > li.Killed .pull-author,
 .repos > li .pull-requests > li.Failure,
 .repos > li .pull-requests > li.Failure:before,
 .repos > li .pull-requests > li.Failure .pull-author { background-color: @redDark; }
@@ -495,6 +499,7 @@ h1.bar {
 .latest-builds ol li.Started { background-color: @progress; color: #FFFFFF; }
 .latest-builds ol li.Success { color: @greenDark; }
 .latest-builds ol li.Error,
+.latest-builds ol li.Killed,
 .latest-builds ol li.Failure { background-color: @redDark; color: #FFFFFF; }
 .latest-builds ol li.ng-enter {
     .transition( all ease 1s );
@@ -603,6 +608,7 @@ h1.bar {
 .latest-builds ol li.Pending .name,
 .latest-builds ol li.Started .name,
 .latest-builds ol li.Error .name,
+.latest-builds ol li.Killed .name,
 .latest-builds ol li.Failure .name { text-shadow: -1px 1px 3px rgba(0,0,0,.6); }
 .latest-builds ol li.Pending .message,
 .latest-builds ol li.Pending .when,
@@ -613,6 +619,9 @@ h1.bar {
 .latest-builds ol li.Error .message,
 .latest-builds ol li.Error .when,
 .latest-builds ol li.Error .duration,
+.latest-builds ol li.Killed .message,
+.latest-builds ol li.Killed .when,
+.latest-builds ol li.Killed .duration,
 .latest-builds ol li.Failure .message,
 .latest-builds ol li.Failure .when,
 .latest-builds ol li.Failure .duration { color: #FFFFFF; }
@@ -627,6 +636,7 @@ h1.bar {
 .dark .repos > li.Started { background-color: @progress; }
 .dark .repos > li.Success { background-color: @greenDark; }
 .dark .repos > li.Error,
+.dark .repos > li.Killed,
 .dark .repos > li.Failure { background-color: @redDark; }
 .dark .repos > li .author img,
 .dark .repos > li .author .no-author { background-color: #FFFFFF; }
@@ -636,7 +646,8 @@ h1.bar {
 .dark .repos > li .pull-requests > li.Pending .pull-author { background-color: @progress; }
 .dark .repos > li .pull-requests > li.Started .pull-author { background-color: @progress; }
 .dark .repos > li .pull-requests > li.Success .pull-author { background-color: @greenDark; }
-.dark .repos > li .pull-requests > li.Error,
+.dark .repos > li .pull-requests > li.Error .pull-author,
+.dark .repos > li .pull-requests > li.Killed .pull-author,
 .dark .repos > li .pull-requests > li.Failure .pull-author { background-color: @redDark; }
 .dark .column:after {
     background: -moz-linear-gradient(    top, rgba(34,34,34,0) 0%,       rgba(34,34,34,1) 70% );
@@ -649,6 +660,7 @@ h1.bar {
 .dark .latest-builds ol li.Pending,
 .dark .latest-builds ol li.Started { background-color: @progress; }
 .dark .latest-builds ol li.Error,
+.dark .latest-builds ol li.Killed,
 .dark .latest-builds ol li.Failure { background-color: @redDark; }
 .dark .latest-builds ol li .author img,
 .dark .latest-builds ol li .author .no-author { background-color: #FFFFFF; }
