@@ -50,7 +50,7 @@
 
     <section class="build-health">
 
-        <h1 class="bar">This Week's Build Health</h1>
+        <h1 class="bar">This Week's Build Health <i class="fa fa-medkit"></i></h1>
 
         <span class="no-builds" data-ng-if="buildCount === 0">Waiting for builds.</span>
 
@@ -77,7 +77,7 @@
 
     <section class="build-leaders">
 
-        <h1 class="bar">This Week's Build Leaders</h1>
+        <h1 class="bar">This Week's Build Leaders <i class="fa fa-users"></i></h1>
 
         <span class="no-builds" data-ng-if="( developers | filter: { visible: true } ).length === 0">Waiting for builders (w/Gravatars).</span>
 
@@ -101,7 +101,7 @@
 
     <section class="latest-builds">
 
-        <h1 class="bar">Latest Builds</h1>
+        <h1 class="bar">Latest Builds <i class="fa fa-rocket"></i></h1>
 
         <span class="no-builds" data-ng-if="builds.length === 0">Waiting for builds.</span>
 
@@ -118,7 +118,7 @@
                 <div class="message">[[ build.message ]]</div>
                 <div class="when" data-ng-if="build.status != 'Pending'">[[ build.started_at * 1000 | from:now ]] ago</div>
                 <div class="when" data-ng-if="build.status == 'Pending'">Build Pending</div>
-                <div class="duration" data-ng-if="build.duration > 0">~ [[ build.duration | duration ]]</div>
+                <div class="duration" data-ng-if="build.duration > 0"><i class="fa fa-clock-o"></i> [[ build.duration | duration ]]</div>
 
             </li>
 
