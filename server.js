@@ -23,7 +23,7 @@ var serveFeed = function ( req, res, next )
     var apiPort   = process.env.API_PORT || (apiScheme == "https" ? 443 : 80);
     var apiToken  = process.env.API_TOKEN  || "";
 
-    var path   = "/api/user/feed?access_token=" + apiToken;
+    var path   = "/api/user/activity?access_token=" + apiToken;
     var client = apiScheme == "https" ? https : http;
 
     var req = client.get(
