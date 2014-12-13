@@ -10,7 +10,7 @@ angular.module( "wall.services", [] )
 
         return { getLatest: function ()
         {
-            return $http.get( "/api/feed" );
+            return $http.get( "api/feed" );
 
         } };
     }
