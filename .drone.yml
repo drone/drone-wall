@@ -1,0 +1,19 @@
+image: go1.2
+notify:
+  email:
+    recipients:
+    - drone@clever.com
+publish:
+  docker:
+    branch: master
+    docker_port: 4243
+    docker_server: {{docker_server}}
+    docker_version: 0.10.0
+    email: {{docker_email}}
+    image_name: clever/drone-wall
+    password: {{docker_password}}
+    push_latest: true
+    registry_login: true
+    username: {{docker_username}}
+script:
+- echo "no tests"

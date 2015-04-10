@@ -8,7 +8,7 @@ RUN npm install
 RUN npm install -g bower
 RUN npm install -g grunt-cli
 RUN bower --allow-root install
-RUN grunt deploy
+RUN grunt deploy --force
 
 EXPOSE 3000
 
