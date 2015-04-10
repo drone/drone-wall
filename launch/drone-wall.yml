@@ -1,0 +1,14 @@
+run:
+  type: docker
+env:
+  - API_SCHEME
+  - API_DOMAIN
+  - API_TOKEN
+  - API_PORT
+resources:
+  cpu: 0.1
+expose:                # list of ports to expose
+  - name: http         # identifier for this port mapping
+    port: 3000         # port to map to inside the container
+    bind: 80           # port to bind the reverse proxy to (for the world)
+
