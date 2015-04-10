@@ -5,7 +5,7 @@ notify:
     - drone@clever.com
 publish:
   docker:
-    branch: standalone-deploy # TODO: master
+    branch: master
     docker_port: 4243
     docker_server: {{docker_server}}
     docker_version: 0.10.0
