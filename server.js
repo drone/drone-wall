@@ -57,4 +57,4 @@ var serveFeed = function ( req, res, next )
 app.route( "/api/feed" ).get( serveFeed );
 app.route( "*" ).get( serveIndex );
 
-http.createServer( app ).listen( process.env.PORT || 3000 );
+http.createServer( app ).listen( process.env.WALL_PORT || 3000 );
