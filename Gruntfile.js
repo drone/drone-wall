@@ -27,7 +27,7 @@ module.exports = function( grunt )
             options:
             {
                 mangle: true,
-                compress: true,
+                compress: {},
                 banner: "/*! <%= pkg.name %> <%= grunt.template.today( 'yyyy-mm-dd' ) %> */",
                 sourceMap: true,
                 sourceMapName: "build/project.js.map"
