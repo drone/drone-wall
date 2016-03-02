@@ -1,0 +1,53 @@
+<section class="wall-config">
+
+    <div>
+
+        <h1><span>Drone</span> <span>Wall</span></h1>
+
+        <form name="configForm" data-ng-submit="config.setConfig( configForm.$valid )" novalidate>
+
+            <ol>
+                <li>
+                    <label for="path">
+                        Enter your Drone API root path.  We'll be slapping <code>user/feed</code> after it, so provide
+                        something like <code>https://drone.yourdomain.com/api/</code>.
+                    </label>
+                    <input type="url" name="path" id="path" data-ng-model="config.path" placeholder="api path"
+                         data-ng-class="{ 'error': configForm.path.$invalid && configForm.$submitted }" required>
+                    <div data-ng-messages="configForm.path.$error" data-ng-if="configForm.$submitted">
+                        <div data-ng-message="required">Please enter the API root</div>
+                        <div data-ng-message="url">Please enter a valid URL</div>
+                    </div>
+                </li>
+                <li>
+                    <label for="token">
+                        Enter a valid Drone token.  You can find this token by accessing your Drone dashboard, clicking
+                        the arrow in the top-right corner, and selecting "profile."
+                    </label>
+                    <input type="text" name="token" id="token" data-ng-model="config.token" placeholder="drone token"
+                        data-ng-class="{ 'error': configForm.token.$invalid && configForm.$submitted }" required>
+                    <div data-ng-messages="configForm.token.$error" data-ng-if="configForm.$submitted">
+                        <div data-ng-message="required">Please enter a token</div>
+                    </div>
+                </li>
+                <li>
+                    <p>
+                        Select a theme.
+                    </p>
+                    <div class="theme">
+                        <a data-ng-click="site.toggleTheme( 'light' )" class="theme-light">light</a>
+                        <a data-ng-click="site.toggleTheme( 'dark' )" class="theme-dark">dark</a>
+                    </div>
+                </li>
+            </ol>
+
+            <div class="buttons">
+                <button type="submit">Save</button>
+                <a href="/#/">Cancel</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</section>

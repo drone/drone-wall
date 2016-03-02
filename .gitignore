@@ -1,5 +1,7 @@
-node_modules
-/source/components
-/build/**
-!/build/README.md
-.vagrant
+/node_modules
+/build
+/coverage
+/.instrumented
+test-results.xml
+deploy.txt
+*.log

@@ -1,0 +1,1028 @@
+@charset "utf-8";
+
+/* Drone Wall Styles */
+
+section.build-column {
+    width: 37%;
+    padding-left: 20px;
+}
+section.repo-column {
+
+    width: 63%;
+    height: 1080px;
+    overflow: hidden;
+
+    & > h1 {
+        margin: 25px 0px 0px 20px;
+        font-size: 31px;
+        font-weight: 300;
+    }
+
+}
+
+aside.config {
+
+    position: absolute;
+    z-index: 100;
+    top: 24px;
+    right: 20px;
+    width: 32px;
+    height: 0;
+    padding-top: 32px;
+    overflow: hidden;
+    line-height: 100px;
+
+    a {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        font-size: 32px;
+        color: @grayDark;
+        cursor: pointer;
+    }
+
+}
+
+.fa-circle-o-notch {
+
+    position: absolute;
+    z-index: 5;
+    text-align: center;
+
+    &.ng-animate { transition: opacity ease 1s; }
+    &.ng-enter { opacity: 0; }
+    &.ng-enter-active,
+    &.ng-leave { opacity: 1; }
+    &.ng-leave-active { opacity: 0; }
+
+}
+
+.column {
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding-top: 80px;
+
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 10px;
+        left: 0;
+        bottom: 0;
+        background: linear-gradient( to bottom, rgba( 234, 234, 234, 0 ) 0%, rgba( 234, 234, 234, 1 ) 70% );
+    }
+
+}
+
+.repos {
+
+    position: relative;
+    margin: 0px 20px;
+    height: 100%;
+
+    & > li {
+
+        transition: transform ease 1.2s, background-color ease .3s;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 1;
+        width: 100%;
+        height: 110px;
+        overflow: hidden;
+        background-color: @white;
+        border-radius: 4px;
+        box-shadow: -1px 1px 5px 0px rgba( 0, 0, 0, .4 );
+        color: @grayDark;
+
+        &.leave {
+            transition: transform ease 1.2s, opacity ease .5s;
+            opacity: 0;
+        }
+        &.pending,
+        &.running { background-color: @blue; color: @white; }
+        &.success { background-color: @green; color: @white; }
+        &.error,
+        &.killed,
+        &.failure { background-color: @red; color: @white; }
+
+        .author {
+
+            position: relative;
+            float: left;
+            width: 105px;
+            height: 110px;
+            padding: 10px 0px 10px 15px;
+
+            img {
+                transition: all ease 1s;
+                position: relative;
+                z-index: 6;
+                width: 90px;
+                height: 90px;
+                border-radius: 90px;
+                background-color: @gray;
+                box-shadow: -2px 2px 4px rgba( 0, 0, 0, .3 );
+            }
+
+            .no-author {
+                transition: all ease 1s;
+                position: relative;
+                z-index: 6;
+                display: inline-block;
+                width: 90px;
+                height: 90px;
+                border-radius: 90px;
+                background-color: @gray;
+                text-align: center;
+                line-height: 90px;
+                font-size: 50px;
+                color: @grayDark;
+            }
+
+            .fa-circle-o-notch {
+                top: 5px;
+                left: 10px;
+                width: 100px;
+                height: 100px;
+                line-height: normal;
+                font-size: 100px;
+                color: @yellow;
+            }
+
+        }
+        &.running > .author {
+            img { transform: scale( .9, .9 ); box-shadow: none; }
+            & > .no-author { transform: scale( .9, .9 ); }
+        }
+
+        .repo-name {
+            padding-right: 40px;
+            padding-left: 15px;
+            overflow: hidden;
+            line-height: 110px;
+            font-size: 58px;
+            font-weight: bold;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        &.pending .repo-name,
+        &.running .repo-name,
+        &.success .repo-name,
+        &.error .repo-name,
+        &.killed .repo-name,
+        &.failure .repo-name { text-shadow: -2px 2px 4px rgba( 0, 0, 0, .4 ); }
+
+        .pull-requests {
+
+            float: right;
+            margin-right: -32px;
+            font-size: 0;
+
+            & > li {
+
+                transition: background-color ease .3s;
+                position: relative;
+                z-index: 10;
+                display: inline-block;
+                width: 127px;
+                height: 110px;
+                background-color: @white;
+
+                &.ng-enter {
+                    transition: width ease .5s;
+                    width: 0px;
+                }
+                &.ng-enter-active {
+                    width: 127px;
+                }
+                &.ng-leave {
+                    transition: width ease .5s;
+                    width: 127px;
+                }
+                &.ng-leave-active {
+                    width: 0px;
+                }
+                &:before {
+                    content: "";
+                    transition: background-color ease .3s;
+                    position: absolute;
+                    z-index: 9;
+                    top: -10px;
+                    left: -30px;
+                    width: 130px;
+                    height: 130px;
+                    background-color: @gray;
+                    border-radius: 120px;
+                    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.6)
+                }
+                .pull-author {
+                    transition: background-color ease .3s;
+                    position: absolute;
+                    z-index: 10;
+                    top: 0;
+                    left: -10px;
+                    width: 130px;
+                    height: 110px;
+                    padding: 10px 20px 10px 0px;
+                    background-color: @gray;
+                    border-radius: 120px 0 0 120px;
+                }
+
+                &.running .pull-author {
+                    img,
+                    .no-author { transform: scale( .9, .9 ); }
+                }
+
+                &.pending,
+                &.pending:before,
+                &.pending .pull-author { background-color: @blue; }
+                &.running,
+                &.running:before,
+                &.running .pull-author { background-color: @blue; }
+                &.success,
+                &.success:before,
+                &.success .pull-author { background-color: @green; }
+                &.error,
+                &.error:before,
+                &.error .pull-author,
+                &.killed,
+                &.killed:before,
+                &.killed .pull-author,
+                &.failure,
+                &.failure:before,
+                &.failure .pull-author { background-color: @red; }
+
+            }
+
+        }
+
+        .pull-author {
+
+            img {
+                transition: all ease 1s;
+                position: relative;
+                z-index: 6;
+                width: 90px;
+                height: 90px;
+                background-color: @gray;
+                border-radius: 90px;
+            }
+
+            .no-author {
+                transition: all ease 1s;
+                position: relative;
+                z-index: 6;
+                display: inline-block;
+                width: 90px;
+                height: 90px;
+                border-radius: 90px;
+                background-color: @gray;
+                text-align: center;
+                line-height: 90px;
+                font-size: 50px;
+                color: @grayDark;
+            }
+
+            .fa-circle-o-notch {
+                top: 5px;
+                left: -5px;
+                width: 100px;
+                height: 100px;
+                line-height: normal;
+                font-size: 100px;
+                color: @yellow;
+            }
+
+        }
+
+    }
+
+}
+
+img.builder {
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+}
+
+.last-failure h1 {
+
+    height: 80px;
+    padding: 25px 0px 24px 0px;
+    text-align: center;
+    font-size: 31px;
+    font-weight: 300;
+
+    .good { font-weight: 700; color: @green; }
+    .bad { font-weight: 700; color: @red; }
+
+}
+
+h1.bar {
+
+    padding: 11px 12px;
+    margin-bottom: 20px;
+    background-color: @grayDark;
+    border-radius: 4px;
+    font-size: 28px;
+    color: @white;
+
+    i { float: right; opacity: .4; }
+
+}
+
+.build-health {
+
+    height: 155px;
+    margin-bottom: 20px;
+    overflow: hidden;
+
+    .no-builds {
+        display: block;
+        text-align: center;
+        line-height: 85px;
+        font-size: 31px;
+        font-weight: 300;
+    }
+    h1.bar { margin-bottom: 20px; }
+    .pull-count,
+    .build-count {
+        width: 15%;
+    }
+
+    & > div {
+
+        float: left;
+        text-align: center;
+
+        h2 {
+            height: 35px;
+            font-size: 24px;
+        }
+        .count {
+            line-height: 50px;
+            font-size: 42px;
+            font-weight: 700;
+        }
+
+    }
+
+    .success-fail {
+
+        float: right;
+        position: relative;
+        width: 67%;
+        padding-right: 20px;
+
+        h2:first-child {
+            float: left;
+            text-align: left;
+        }
+        h2 {
+            float: right;
+            text-align: right;
+        }
+        .build-bar {
+
+            transform: translate3d( 0, 0, 0 );  /* Resolve Chrome rendering issue */
+            position: relative;
+            margin-top: 35px;
+            overflow: hidden;
+            border-radius: 4px;
+
+            .success {
+                width: 100%;
+                height: 50px;
+                padding-left: 10px;
+                text-align: left;
+                line-height: 50px;
+                background-color: @green;
+                font-size: 34px;
+                font-weight: 700;
+                color: @white;
+            }
+            .failure {
+                transition: width ease 1s;
+                position: absolute;
+                top: 0;
+                right: 0;
+                min-width: 49px;
+                max-width: 71%;
+                height: 50px;
+                padding-right: 10px;
+                text-align: right;
+                line-height: 50px;
+                background-color: @red;
+                font-size: 34px;
+                font-weight: 700;
+                color: @white;
+            }
+            .failure span {
+                position: relative;
+                z-index: 10;
+            }
+
+            .success.zero {
+                background-color: @red;
+            }
+            .failure.zero {
+                background-color: @green;
+            }
+            .failure.zero:before {
+                border-bottom: 50px solid @green;
+            }
+
+        }
+
+        .failure:before {
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: 9;
+            left: -50px;
+            top: -50px;
+            width: 0;
+            height: 0;
+            border: 50px solid transparent;
+            border-bottom: 50px solid @red;
+        }
+
+    }
+
+}
+
+.build-leaders {
+
+    height: 190px;
+    margin-bottom: 20px;
+
+    .no-builds {
+        display: block;
+        text-align: center;
+        line-height: 120px;
+        font-size: 31px;
+        font-weight: 300;
+    }
+    ol {
+
+        height: 110px;
+        padding-top: 10px;
+
+        li {
+
+            float: left;
+            width: 25%;
+            height: 100%;
+
+            .container {
+                position: relative;
+                width: 130px;
+                height: 100%;
+                margin: 0px auto;
+            }
+            .developer {
+
+                float: left;
+
+                img {
+                    float: left;
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 100px;
+                }
+
+            }
+            span {
+
+                display: block;
+                position: absolute;
+                transform: scale( 1 );
+                transition: transform ease-in-out .2s;
+                left: 80px;
+                width: 50px;
+                height: 50px;
+                background-color: @gray;
+                border-radius: 50px;
+                box-shadow: -1px 1px 5px 0px rgba( 0, 0, 0, .4 );
+                line-height: 50px;
+                text-align: center;
+                font-size: 28px;
+                color: @grayDark;
+
+                &:nth-of-type( 1 ) { top: -10px; }
+                &:nth-of-type( 2 ) { bottom: -10px; }
+                &.successes { background-color: @green; color: @white; }
+                &.failures { background-color: @red; color: @white; }
+
+            }
+            &.success-pop span.successes { transform: scale( 1.2 ); }
+            &.failure-pop span.failures { transform: scale( 1.2 ); }
+
+        }
+
+    }
+
+
+}
+
+.latest-builds {
+
+    .no-builds {
+        display: block;
+        text-align: center;
+        line-height: 100px;
+        font-size: 31px;
+        font-weight: 300;
+    }
+    ol li {
+
+        position: relative;
+        transform: translate3d( 0, 0, 0 );
+        transition: background-color ease .3s;
+        opacity: 1;
+        height: 94px;
+        margin-bottom: 15px;
+        overflow: hidden;
+        background-color: @white;
+        border-radius: 4px;
+        box-shadow: -1px 1px 3px rgba( 0, 0, 0, .3 );
+        color: @grayDark;
+
+        &.pending,
+        &.running { background-color: @blue; color: @white; }
+        &.success { color: @green; }
+        &.error,
+        &.killed,
+        &.failure { background-color: @red; color: @white; }
+        &.ng-enter {
+            transition: all ease 1s;
+            transform: scale( .9, .9 );
+            opacity: 0;
+            margin-top: -90px;
+        }
+        &.ng-enter-active {
+            transform: scale(1,1);
+            opacity: 1;
+            margin-top: 0;
+        }
+        &.ng-leave {
+            transition: all ease 1s;
+            transform: scale(1,1);
+            opacity: 1;
+        }
+        &.ng-leave-active {
+            transform: scale( .9, .9 );
+            opacity: 0;
+        }
+        .author {
+
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 99px;
+            height: 94px;
+            padding: 10px 15px 10px 10px;
+
+            img {
+                transition: all ease 1s;
+                position: relative;
+                z-index: 6;
+                width: 74px;
+                height: 74px;
+                border-radius: 74px;
+                background-color: @gray;
+                box-shadow: -1px 1px 3px rgba( 0, 0, 0, .3 );
+            }
+
+            .no-author {
+                transition: all ease 1s;
+                position: relative;
+                z-index: 6;
+                display: inline-block;
+                width: 80px;
+                height: 80px;
+                border-radius: 80px;
+                background-color: @gray;
+                text-align: center;
+                line-height: 80px;
+                font-size: 40px;
+                color: @grayDark;
+            }
+
+            .fa-circle-o-notch {
+                top: 7px;
+                left: 7px;
+                width: 80px;
+                height: 80px;
+                line-height: normal;
+                font-size: 80px;
+                color: @yellow;
+            }
+
+        }
+        &.running .author {
+            img { transform: scale( .9, .9 ); box-shadow: none; }
+            .no-author { transform: scale( .9, .9 ); }
+        }
+
+        .name {
+            transition: color ease .3s;
+            max-width: 77%;
+            max-width: ~"calc( 100% - 140px )";
+            padding: 9px 0px 11px 105px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 40px;
+            font-weight: 700;
+        }
+        .message {
+            transition: color ease .3s;
+            margin-right: 15px;
+            padding: 0px 0px 3px 105px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 18px;
+            color: @grayDark;
+        }
+        .when {
+            transition: color ease .3s;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            line-height: 14px;
+            font-size: 14px;
+            color: @grayDark;
+        }
+        .when.ng-leave,
+        .when.ng-leave-active { display: none; }
+        .duration {
+            transition: color ease .3s;
+            position: absolute;
+            top: 35px;
+            right: 15px;
+            line-height: 14px;
+            font-size: 14px;
+            color: @grayDark;
+        }
+
+        &.pending .name,
+        &.running .name,
+        &.error .name,
+        &.killed .name,
+        &.failure .name { text-shadow: -1px 1px 3px rgba(0,0,0,.6); }
+        &.pending .message,
+        &.pending .when,
+        &.pending .duration,
+        &.running .message,
+        &.running .when,
+        &.running .duration,
+        &.error .message,
+        &.error .when,
+        &.error .duration,
+        &.killed .message,
+        &.killed .when,
+        &.killed .duration,
+        &.failure .message,
+        &.failure .when,
+        &.failure .duration { color: @white; }
+
+    }
+
+}
+
+
+/* Dark theme */
+
+.dark {
+
+    background-color: @blackish;
+
+    main > section { color: @gray; }
+
+    .repos > li {
+
+        background-color: @gray;
+
+        &.pending,
+        &.running { background-color: @blue; }
+        &.success { background-color: @green; }
+        &.error,
+        &.killed,
+        &.failure { background-color: @red; }
+
+        .author img,
+        .author .no-author { background-color: @white; }
+        .pull-requests > li .pull-author,
+        .pull-author img,
+        .pull-author .no-author { background-color: @white; }
+
+        .pull-requests > li {
+
+            &.pending .pull-author { background-color: @blue; }
+            &.running .pull-author { background-color: @blue; }
+            &.success .pull-author { background-color: @green; }
+            &.error .pull-author,
+            &.killed .pull-author,
+            &.failure .pull-author { background-color: @red; }
+
+        }
+
+    }
+
+    .column:after {
+        background: linear-gradient( to bottom, rgba( 34, 34, 34, 0 ) 0%, rgba( 34, 34, 34, 1 ) 70% );
+    }
+    h1.bar { background-color: @grayDark; }
+
+    .latest-builds ol li {
+
+        background-color: @gray;
+
+        &.pending,
+        &.running { background-color: @blue; }
+        &.error,
+        &.killed,
+        &.failure { background-color: @red; }
+
+        .author img,
+        .author .no-author { background-color: @white; }
+
+    }
+
+}
+
+/* Some slight responsiveness */
+
+@media( max-width: 1760px )
+{
+    .last-failure h1 { padding: 28px 0 21px; font-size: 25px; }
+}
+@media( max-width: 1700px )
+{
+    .latest-builds ol li .name {
+        padding-top: 13px;
+        font-size: 34px;
+    }
+}
+@media( max-width: 1450px )
+{
+    section.repo-column > h1 { margin-top: 28px; font-size: 25px; }
+    .repos > li .repo-name { line-height: 110px; font-size: 42px; }
+    .last-failure h1 .wide { display: none; }
+    .build-health .no-builds,
+    .build-leaders .no-builds,
+    .latest-builds .no-builds { font-size: 22px; }
+    .build-health > div .count { font-size: 30px; }
+    .build-leaders ol {
+
+        padding-top: 20px;
+
+        li {
+
+            .container { width: 100px; height: 85px; }
+            .developer img {
+                width: 85px;
+                height: 85px;
+                border-radius: 85px;
+            }
+            span {
+                left: 65px;
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+                font-size: 18px;
+            }
+
+        }
+
+    }
+    .latest-builds ol li {
+
+        .name {
+            max-width: 75%;
+            max-width: ~"calc( 100% - 140px )";
+            padding-top: 18px;
+            padding-bottom: 14px;
+            font-size: 25px;
+        }
+        .message { font-size: 15px; }
+
+    }
+}
+@media( max-width: 1230px )
+{
+    main {
+
+        & > section.build-column {
+            display: block;
+            max-width: 800px;
+            height: auto;
+            margin: 0 auto;
+            width: auto;
+            padding: 0 20px;
+        }
+        & > section.repo-column {
+            display: none;
+        }
+
+    }
+}
+@media( max-width: 650px )
+{
+    main {
+        padding-bottom: 60px;
+    }
+
+    aside.config {
+
+        position: absolute;
+        z-index: 100;
+        top: auto;
+        bottom: 20px;
+        right: 0;
+        width: 100%;
+        height: auto;
+        padding-top: 0;
+        overflow: visible;
+        line-height: 1;
+        text-align: center;
+
+        a {
+            display: inline-block;
+            position: static;
+            left: auto;
+            top: auto;
+            width: auto;
+            height: auto;
+            font-size: 24px;
+        }
+
+    }
+}
+@media( max-width: 460px )
+{
+    main {
+
+        height: auto;
+
+        & > section.build-column {
+            padding: 10px 10px 0;
+        }
+
+    }
+
+    .last-failure { display: none; }
+    h1.bar { padding: 8px 12px; font-size: 20px; }
+
+    .build-health {
+
+        height: 127px;
+
+        .no-builds {
+            line-height: 71px;
+        }
+
+        & > div {
+
+            h2 { height: 25px; font-size: 16px; }
+            .count { line-height: 40px; font-size: 24px; }
+
+        }
+
+        .success-fail {
+
+            padding-right: 10px;
+
+            .build-bar {
+
+                margin-top: 25px;
+
+                .success,
+                .failure {
+                    height: 40px;
+                    line-height: 40px;
+                    font-size: 26px;
+                }
+
+                .failure::before {
+                    left: -40px;
+                    top: -40px;
+                    border-width: 40px;
+                }
+
+            }
+
+        }
+
+    }
+
+    .build-leaders {
+
+        height: 141px;
+
+        .no-builds {
+            line-height: 85px;
+        }
+
+        ol {
+
+            padding-top: 10px;
+
+            li {
+
+                .container { width: 75px; height: 60px; }
+                .developer img {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 60px;
+                }
+                span {
+                    left: 40px;
+                    width: 30px;
+                    height: 30px;
+                    line-height: 30px;
+                    font-size: 16px;
+                }
+
+            }
+
+        }
+
+    }
+    .latest-builds {
+
+        .no-builds {
+            line-height: 60px;
+        }
+
+        ol li {
+
+            height: 66px;
+            margin-bottom: 10px;
+
+            .author {
+
+                width: 70px;
+                height: 65px;
+
+                img {
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 45px;
+                }
+
+                .fa-circle-o-notch {
+                    width: 51px;
+                    height: 51px;
+                    line-height: normal;
+                    font-size: 51px;
+                }
+
+            }
+            .running .author img { transform: scale( .95, .95 ); }
+
+            .name {
+                max-width: ~"calc( 100% - 70px )";
+                padding-top: 8px;
+                padding-bottom: 5px;
+                padding-left: 70px;
+                font-size: 18px;
+            }
+            .message {
+                max-height: 28px;
+                margin-right: 10px;
+                padding-bottom: 0;
+                padding-left: 70px;
+                overflow: hidden;
+                font-size: 10px;
+                white-space: normal;
+                line-height: 13px;
+            }
+            .when {
+                top: 4px;
+                right: 10px;
+                font-size: 8px;
+            }
+            .duration {
+                top: 15px;
+                right: 10px;
+                font-size: 8px;
+            }
+
+        }
+
+    }
+}

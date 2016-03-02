@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+@nodeModules: "../../../../node_modules/";
+@import (inline) "@{nodeModules}css-reset/reset.css";
+@import (inline) "@{nodeModules}angular-toastr/dist/angular-toastr.css";
+
+@import "variables";
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: @gray;
+}
+
+main {
+
+    position: relative;
+    min-height: 100vh;
+    font-size: 0;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+
+    & > section {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 14px;
+    }
+
+}
+
+#toast-container.toast-top-full-width {
+
+    margin-top: 15px;
+
+    .toast {
+
+        width: ~"calc( 100% - 40px )";
+        background-color: @red;
+
+        a {
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 46px;
+            height: 46px;
+            text-align: center;
+            line-height: 46px;
+            font-size: 24px;
+        }
+
+    }
+
+}
+
+@media( max-width: 480px )
+{
+    #toast-container.toast-top-full-width {
+
+        .toast {
+            padding: 15px 15px 15px 50px;
+        }
+
+    }
+}
+
+@media( max-width: 460px )
+{
+    #toast-container.toast-top-full-width {
+
+        margin-top: 10px;
+
+        .toast {
+            width: ~"calc( 100% - 20px )";
+        }
+
+    }
+}
+
+
+@import "wall";
+@import "../../config/styles/config.less";

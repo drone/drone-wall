@@ -1,7 +1,8 @@
 {
   "name": "drone-wall",
-  "version": "2.0.0",
-  "description": "Drone Wall",
+  "version": "3.0.0",
+  "description": "Wall display component for Drone CI server.",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/drone/drone-wall.git"
@@ -10,15 +11,56 @@
     "url": "https://github.com/drone/drone-wall/issues"
   },
   "homepage": "https://github.com/drone/drone-wall",
+  "scripts": {
+    "install": "node ./node_modules/protractor/bin/webdriver-manager update",
+    "server": "grunt connect:local:keepalive",
+    "start": "grunt build connect:local watch",
+    "test": "grunt test --apiroot=https://drone.testdomain.com/api/"
+  },
   "devDependencies": {
-    "grunt-contrib-watch": "^0.6.1"
+    "babelify": "^7.2.0",
+    "browserify-istanbul": "^0.2.1",
+    "browserify-replace": "^0.9.0",
+    "config-extend": "^0.1.0",
+    "dominatr-grunt": "^6.1.0",
+    "grunt": "^0.4.5",
+    "grunt-angular-templates": "^0.5.7",
+    "grunt-aws": "^0.6.1",
+    "grunt-babel": "^6.0.0",
+    "grunt-browserify": "^4.0.1",
+    "grunt-contrib-clean": "^0.7.0",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-imagemin": "^1.0.0",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-less": "^1.1.0",
+    "grunt-contrib-uglify": "^0.10.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-filerev": "^2.3.1",
+    "grunt-filerev-replace": "^0.1.4",
+    "grunt-istanbul": "^0.6.1",
+    "grunt-localstack": "^1.0.0",
+    "grunt-newer": "^1.1.1",
+    "grunt-postcss": "^0.7.1",
+    "grunt-protractor-coverage": "github:mdasberg/grunt-protractor-coverage#ef6a8fb",
+    "grunt-svg-sprite": "github:vokal/grunt-svg-sprite.git#8200979a0e",
+    "grunt-svgmin": "^3.1.0",
+    "grunt-truecolors-less": "1.0.x",
+    "jasmine-bail-fast": "0.0.1",
+    "jasmine-core": "^2.3.4",
+    "jasmine-reporters": "^2.0.7",
+    "load-grunt-config": "^0.19.0",
+    "protractor": "^2.5.1"
   },
   "dependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-concat": "^0.5.0",
-    "grunt-contrib-less": "^0.11.4",
-    "grunt-contrib-uglify": "^0.5.0",
-    "ejs": "~1.0.0",
-    "express": "^4.4.5"
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-messages": "^1.5.0",
+    "angular-mocks": "^1.5.0",
+    "angular-route": "^1.5.0",
+    "angular-toastr": "^1.7.0",
+    "css-reset": "github:vokal/css-reset#50f2692",
+    "moment": "^2.11.2",
+    "vokal-ng-api": "github:vokal/vokal-ng-api#e4beffc"
   }
 }

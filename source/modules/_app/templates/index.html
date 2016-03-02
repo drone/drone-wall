@@ -1,0 +1,54 @@
+<!doctype html>
+
+<html lang="en-US" data-ng-app="App">
+
+    <head data-ng-controller="Head as head">
+
+        <meta charset="utf-8">
+        <title data-ng-bind="head.meta.title">Drone Wall</title>
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0, width=device-width">
+
+        <meta property="{{ property }}" content="{{ content }}"
+            data-ng-repeat="( property, content ) in head.meta.tags"
+            data-ng-if="content">
+
+        <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png?v=Nmmr44wJaG">
+        <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-touch-icon-60x60.png?v=Nmmr44wJaG">
+        <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png?v=Nmmr44wJaG">
+        <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-touch-icon-76x76.png?v=Nmmr44wJaG">
+        <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png?v=Nmmr44wJaG">
+        <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-touch-icon-120x120.png?v=Nmmr44wJaG">
+        <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-touch-icon-144x144.png?v=Nmmr44wJaG">
+        <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-touch-icon-152x152.png?v=Nmmr44wJaG">
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon-180x180.png?v=Nmmr44wJaG">
+        <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png?v=Nmmr44wJaG" sizes="32x32">
+        <link rel="icon" type="image/png" href="/favicon/favicon-194x194.png?v=Nmmr44wJaG" sizes="194x194">
+        <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png?v=Nmmr44wJaG" sizes="96x96">
+        <link rel="icon" type="image/png" href="/favicon/android-chrome-192x192.png?v=Nmmr44wJaG" sizes="192x192">
+        <link rel="icon" type="image/png" href="/favicon/favicon-16x16.png?v=Nmmr44wJaG" sizes="16x16">
+        <link rel="manifest" href="/favicon/manifest.json?v=Nmmr44wJaG">
+        <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=Nmmr44wJaG" color="#5bbad5">
+        <link rel="shortcut icon" href="/favicon/favicon.ico?v=Nmmr44wJaG">
+        <meta name="apple-mobile-web-app-title" content="Drone Wall">
+        <meta name="application-name" content="Drone Wall">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png?v=Nmmr44wJaG">
+        <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=Nmmr44wJaG">
+
+        <link rel="stylesheet" href="/project.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700">
+
+        <base href="/">
+
+    </head>
+
+    <body data-ng-controller="Site as site" data-ng-class="{ dark: site.theme == 'dark' }">
+
+        <main data-ng-view data-autoscroll></main>
+
+        <script src="/dist.js" defer></script>
+
+    </body>
+
+</html>

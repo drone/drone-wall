@@ -1,118 +1,27 @@
-module.exports = function( grunt )
-{
-	"use strict";
+"use strict";
 
-    // Project configuration
+module.exports = function ( grunt )
+{
+    var path   = require( "path" );
+    var env    = grunt.option( "env" ) || "local";
+    var envObj = grunt.file.readJSON( "env.json" )[ env ];
+
+    envObj.apiroot = grunt.option( "apiroot" ) || envObj.apiroot || "";
+    envObj.token   = grunt.option( "token" )   || "";
+    envObj.theme   = grunt.option( "theme" )   || "light";
+
     grunt.initConfig( {
-        pkg: grunt.file.readJSON( "package.json" ),
-        watch:
-        {
-            scripts:
-            {
-                files: [
-                    "source/scripts/project/*"
-                ],
-                tasks: [ "concat:scripts" ]
-            },
-            styles:
-            {
-                files: [
-                    "source/styles/project/*"
-                ],
-                tasks: [ "less:dev" ]
-            }
-        },
-        uglify:
-        {
-            options:
-            {
-                mangle: true,
-                compress: true,
-                banner: "/*! <%= pkg.name %> <%= grunt.template.today( 'yyyy-mm-dd' ) %> */",
-                sourceMap: true,
-                sourceMapName: "build/project.js.map"
-            },
-            project:
-            {
-                files:
-                {
-                    "build/project.js": [
-                        "source/scripts/project/*"
-                    ]
-                }
-            }
-        },
-        less:
-        {
-            dev:
-            {
-                files: {
-                    "build/project.css": "source/styles/project/main.less"
-                }
-            },
-            deploy:
-            {
-                options: {
-                    rootpath: process.env.STATIC_PATH || ""
-                },
-                files: {
-                    "build/project.css": "source/styles/project/main.less"
-                }
-            }
-        },
-        concat:
-        {
-            scripts:
-            {
-                src: [
-                    "source/scripts/project/*"
-                ],
-                dest: "build/project.js"
-            },
-            jquery:
-            {
-                src: [
-                    "source/components/jquery/dist/jquery.min.js"
-                ],
-                dest: "build/jquery.js"
-            },
-            angular:
-            {
-                src: [
-                    "source/components/angular/angular.min.js",
-                    "source/components/angular-route/angular-route.min.js",
-                    "source/components/angular-animate/angular-animate.min.js"
-                ],
-                dest: "build/angular.js"
-            },
-            components:
-            {
-                src: [
-                    "source/components/moment/min/moment.min.js"
-                ],
-                dest: "build/components.js"
-            },
-            styles:
-            {
-                src: [
-                    "source/styles/library/reset.css",
-                    "source/styles/library/vokal.css"
-                ],
-                dest: "build/base.css"
-            }
-        }
+        env: envObj,
+        envName: env,
+        version: grunt.option( "gitver" ) || Date.now() // for deployment
     } );
 
-    // Load plugins
-    grunt.loadNpmTasks( "grunt-contrib-watch" );
-    grunt.loadNpmTasks( "grunt-contrib-uglify" );
-    grunt.loadNpmTasks( "grunt-contrib-concat" );
-    grunt.loadNpmTasks( "grunt-contrib-less" );
-
-    // Default task(s)
-    grunt.registerTask( "default", [ "concat", "less:dev" ] );
-
-    // Customize deploy task, or add additional deploy tasks for each environment being deployed to
-    grunt.registerTask( "deploy",  [ "uglify", "concat:jquery", "concat:angular", "concat:components", "concat:styles", "less:deploy" ] );
-
+    require( "load-grunt-config" )( grunt, {
+        configPath: path.join( process.cwd(), "node_modules", "dominatr-grunt", "grunt" ),
+        overridePath: path.join( process.cwd(), "grunt" ),
+        mergeFunction: function ( obj, ext )
+        {
+            return require( "config-extend" )( obj, ext );
+        }
+    } );
 };
