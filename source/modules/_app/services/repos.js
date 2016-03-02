@@ -88,7 +88,7 @@ module.exports = [ "$rootScope",
                     {
                         currentRepo.lastMerge = build.startedAt;
                         currentRepo.status    = build.status;
-                        currentRepo.developer = checkMerge( build ) ? currentRepo.developer : build.developer;
+                        currentRepo.developer = checkMerge( build ) ? currentRepo.developer : developer;
                     }
                 }
 
