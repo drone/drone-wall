@@ -50,3 +50,11 @@ The AWS access key ID and secret access key should belong to an AWS user created
 Be sure to set `apiroot`, `token`, or `theme` in the deploy command as appropriate.  Deployment should only take a few seconds, but building on AWS's end can take upwards of ten minutes.
 
 You can also just run `grunt` with the appropriate `env` value to export the full site to your `/build` directory, and manually deploy its contents to whatever web hosting solution you prefer.
+
+## Docker Image
+
+We provide a lightweight (6mb) Docker image for quick setup and installation:
+
+```
+docker run -d -p 80:80 drone/drone-wall
+```
