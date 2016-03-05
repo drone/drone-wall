@@ -27,7 +27,9 @@ The `apiroot`, `token`, and `theme` vars can be changed via the Wall interface a
 
 ## Local Development
 
-Begin with `npm install`, and then run `npm start` to build the application, start a file-watcher, and run a local server accessible at `localhost:3000`.  You can pass Grunt flags through `npm` (as of 2.0.0) like this:
+The Drone Wall requires Node.js `4.x` and npm `3.x`.
+
+Begin with `npm install`, and then run `npm start` to build the application, start a file-watcher, and run a local server accessible at `localhost:3000`.  You can pass Grunt flags through `npm` (as of `2.0.0`) like this:
 
 ````
 npm start -- -env=dev -theme=dark
