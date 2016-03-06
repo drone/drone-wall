@@ -21,7 +21,7 @@ grunt --env=<env> --apiroot=<path> --token=<token> --theme=<theme>
 
 * **theme**: `[light|dark]` Defaults to `light`.  Determines whether the Wall is displayed using the light or dark theme.
 
-The Drone Wall requires both `apiroot` and `token` values in order to run.  If they aren't supplied via the command line build process, they will be asked for in the Wall interface itself.  This is the best way to secure your repo data from public access.  It's a good idea to pre-set `apiroot`, and require `token` to be entered via the site.  Feel free to build in the `token` value if you only plan to use the Wall internally, and aren't concerned about it being accessible to the public.
+**Be aware:** supplying these values hard-codes them into the deployed JavaScript files, so providing your Drone token here is suitable *only* when you do not plan to deploy the Drone Wall someplace public. If the `apiroot` and `token` values aren't supplied via the command line build process, they will be asked for in the Wall interface itself.
 
 The `apiroot`, `token`, and `theme` vars can be changed via the Wall interface at any time.  Once set, they'll be stored in localstorage so you don't have to reenter them.
 
