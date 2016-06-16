@@ -51,6 +51,8 @@ Be sure to set `apiroot`, `token`, or `theme` in the deploy command as appropria
 
 You can also just run `grunt` with the appropriate `env` value to export the full site to your `/build` directory, and manually deploy its contents to whatever web hosting solution you prefer.
 
+If you plan to deploy to a non-root directory, update the `<base>` tag in `index.html`, found in `/source/modules/_app/templates`, before running your Grunt tasks.  For example, if you want to deploy to `something.com/wall`, set `href` to `/wall/`.
+
 ## Docker Image
 
 We provide a lightweight (6mb) Docker image for quick setup and installation:

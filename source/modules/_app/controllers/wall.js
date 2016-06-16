@@ -171,7 +171,7 @@ module.exports = [
                     }
                     else
                     {
-                        toastr.error( "Malformed Drone response. <a href='/#/config'><i class='fa fa-cog'></i></a>" );
+                        toastr.error( "Malformed Drone response. <a href='#/config'><i class='fa fa-cog'></i></a>" );
                         ctrl.updating = false;
                     }
 
@@ -180,12 +180,12 @@ module.exports = [
                     if( response.status === 401 )
                     {
                         toastr.error(
-                            "Drone authorization failed. <a href='/#/config'><i class='fa fa-cog'></i></a>" );
+                            "Drone authorization failed. <a href='#/config'><i class='fa fa-cog'></i></a>" );
                     }
                     else
                     {
                         toastr.error(
-                            "Could not retrieve Drone status. <a href='/#/config'><i class='fa fa-cog'></i></a>" );
+                            "Could not retrieve Drone status. <a href='#/config'><i class='fa fa-cog'></i></a>" );
                     }
 
                     ctrl.updating = false;

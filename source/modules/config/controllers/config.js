@@ -1,8 +1,8 @@
 "use strict";
 
-module.exports = [ "DroneAPI",
+module.exports = [ "$location", "DroneAPI",
 
-    function ( DroneAPI )
+    function ( $location, DroneAPI )
     {
         var ctrl = this;
 
@@ -18,7 +18,10 @@ module.exports = [ "DroneAPI",
                 localStorage.setItem( "path", ctrl.path );
                 localStorage.setItem( "token", ctrl.token );
 
-                window.location = "/";
+                DroneAPI.rootPath = ctrl.path || DroneAPI.rootPath;
+                DroneAPI.setKey( ctrl.token || DroneAPI.getKey() );
+
+                $location.path( "/" );
             }
         };
 
