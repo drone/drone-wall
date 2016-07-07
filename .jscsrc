@@ -1,4 +1,6 @@
 {
+    "disallowEmptyBlocks": true,
+    "disallowMultipleLineStrings": true,
     "disallowSpaceAfterKeywords": [
         "do",
         "for",
@@ -23,9 +25,11 @@
     "disallowSpacesInNamedFunctionExpression": {
         "beforeOpeningRoundBrace": true
     },
+    "disallowTabs": true,
     "disallowTrailingComma": true,
     "disallowTrailingWhitespace": true,
     "maximumLineLength": 120,
+    "requireCapitalizedConstructors": true,
     "requireCommaBeforeLineBreak": true,
     "requireCurlyBraces": [
         "if",
@@ -59,7 +63,7 @@
     "requireSpacesInsideParentheses": {
         "all": true
     },
-    "requireSemicolons": true,
+    "validateIndentation": 4,
     "validateParameterSeparator": ", ",
     "validateQuoteMarks": { "mark": "\"", "escape": true }
 }

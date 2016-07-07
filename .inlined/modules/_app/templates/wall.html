@@ -1,0 +1,130 @@
+<aside class="config">
+    <a href="#/config"><i class="fa fa-cog"></i> Config</a>
+</aside>
+
+<section class="build-column">
+
+    <section class="last-failure">
+
+        <h1 data-ng-if="!wall.failDate"><span class="good">No failed builds</span> today!</h1>
+        <h1 data-ng-if="wall.failDate"><span class="wide">It's been </span><span class="bad">{{ wall.failDate | from:wall.now }}</span> since the last failed build<span class="wide">.</span></h1>
+
+    </section>
+
+    <section class="build-health">
+
+        <h1 class="bar">This Week's Build Health <i class="fa fa-medkit"></i></h1>
+
+        <span class="no-builds" data-ng-if="wall.buildCount === 0">Waiting for builds.</span>
+
+        <div class="build-count" data-ng-if="wall.buildCount > 0">
+            <h2>Builds</h2>
+            <div class="count">{{ wall.buildCount }}</div>
+        </div>
+
+        <div class="pull-count" data-ng-if="wall.buildCount > 0">
+            <h2>PRs</h2>
+            <div class="count">{{ wall.pullCount }}</div>
+        </div>
+
+        <div class="success-fail" data-ng-if="wall.buildCount > 0">
+            <h2>Successes</h2>
+            <h2>Failures</h2>
+            <div class="build-bar">
+                <div class="success" data-ng-class="{ zero: wall.successCount === 0 }">{{ wall.successCount }}</div>
+                <div class="failure" data-ng-class="{ zero: wall.failureCount === 0 }" style="width: calc( {{ ( wall.failureCount / ( wall.successCount + wall.failureCount ) ) * 100 }}% - 25px )"><span>{{ wall.failureCount }}</span></div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="build-leaders">
+
+        <h1 class="bar">This Week's Build Leaders <i class="fa fa-users"></i></h1>
+
+        <span class="no-builds" data-ng-if="( wall.developers | filter: { visible: true } ).length === 0">Waiting for builders.</span>
+
+        <ol data-ng-if="( wall.developers | filter: { visible: true } ).length > 0">
+
+            <li data-ng-repeat="developer in wall.developers | filter: { visible: true, avatar: 'http' } | orderBy: ['-rank','-successes'] | limitTo: wall.maxLeaders" data-ng-style="{ width: ( 100 / wall.maxLeaders ) + '%' }" data-iterate-pop>
+
+                <div class="container">
+                    <div class="developer">
+                        <img data-ng-src="{{ developer.avatar }}" class="builder">
+                    </div>
+                    <span class="successes" data-ng-if="developer.successes > 0">{{ developer.successes }}</span>
+                    <span class="failures" data-ng-if="developer.failures > 0">{{ developer.failures }}</span>
+                </div>
+
+            </li>
+
+        </ol>
+
+    </section>
+
+    <section class="latest-builds">
+
+        <h1 class="bar">Latest Builds <i class="fa fa-rocket"></i></h1>
+
+        <span class="no-builds" data-ng-if="wall.builds.length === 0">Waiting for builds.</span>
+
+        <ol data-ng-if="wall.builds.length > 0">
+
+            <li class="{{ build.status }}" data-ng-repeat="build in wall.builds | orderBy: 'createdAt': true | limitTo: wall.maxBuilds">
+
+                <div class="author">
+                    <img data-ng-src="{{ build.developer.avatar }}" data-ng-if="build.developer.avatar">
+                    <span class="no-author" data-ng-if="!build.developer.avatar"><i class="fa fa-user"></i></span>
+                    <i class="fa fa-circle-o-notch fa-spin" data-ng-if="build.status === 'running'"></i>
+                </div>
+                <div class="name">{{ build.name }}</div>
+                <div class="message">{{ build.message }}</div>
+                <div class="when" data-ng-if="build.status !== 'pending'">{{ build.startedAt * 1000 | from:wall.now }} ago</div>
+                <div class="when" data-ng-if="build.status === 'pending'">Build Pending</div>
+                <div class="duration" data-ng-if="build.finishedAt > 0">
+                    <i class="fa fa-clock-o"></i> {{ ( build.finishedAt - build.startedAt ) | duration }}
+                </div>
+
+            </li>
+
+        </ol>
+
+    </section>
+
+</section>
+
+<section class="repo-column">
+
+    <h1>Watching repos since <span data-ng-bind="wall.watchTime | moment: 'dddd, MMMM Do [at] h:mm a': true">...</span></h1>
+
+    <div class="column">
+
+        <ul class="repos">
+
+            <li data-ng-repeat="repo in wall.displayRepos" class="{{ repo.status }}" data-scroll-repo>
+
+                <div class="author">
+                    <img data-ng-src="{{ repo.developer.avatar }}" data-ng-if="repo.developer.avatar">
+                    <span class="no-author" data-ng-if="!repo.developer.avatar"><i class="fa fa-user" data-ng-if="repo.lastMerge"></i></span>
+                    <i class="fa fa-circle-o-notch fa-spin" data-ng-if="repo.status === 'running'"></i>
+                </div>
+
+                <ul class="pull-requests">
+                    <li data-ng-repeat="pull in repo.pulls | filter: { merging: false }" class="{{ pull.status }}">
+                        <div class="pull-author">
+                            <img data-ng-src="{{ pull.developer.avatar }}" data-ng-if="pull.developer.avatar">
+                            <span class="no-author" data-ng-if="!pull.developer.avatar"><i class="fa fa-user"></i></span>
+                            <i class="fa fa-circle-o-notch fa-spin" data-ng-if="pull.status === 'running'"></i>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="repo-name">{{ repo.name }}</div>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
