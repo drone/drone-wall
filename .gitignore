@@ -1,6 +1,7 @@
 /node_modules
 /build
 /coverage
+/.inlined
 /.instrumented
 test-results.xml
 deploy.txt
