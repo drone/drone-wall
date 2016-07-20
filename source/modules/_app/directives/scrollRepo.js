@@ -7,7 +7,7 @@ module.exports = function ()
         link: function ( scope, element )
         {
             var repoHeight       = 125;
-            var startingPosition = scope.$index * repoHeight;
+            var startingPosition = scope.repo.order * repoHeight;
 
             scope.wall.position = startingPosition;
             element.css( "transform", "translate3D( 0, " + startingPosition + "px, 0 )" );
@@ -26,10 +26,10 @@ module.exports = function ()
 
             scope.$on( "scrollRepos", function ()
             {
-                scope.wall.position = ( scope.$index - 1 ) * repoHeight;
-                element.css( "transform", "translate3D( 0, " + scope.wall.position + "px, 0 )"
-                    + ( scope.$index === 0 ? " scale( .9, .9 )" : "" ) );
-                element.toggleClass( "leave", scope.$index === 0 );
+                scope.wall.position = ( scope.repo.order - 1 ) * repoHeight;
+                element.css( "transform", "translate3D( 0, " + scope.wall.position + "px, 0 )" +
+                    ( scope.repo.order === 0 ? " scale( .9, .9 )" : "" ) );
+                element.toggleClass( "leave", scope.repo.order === 0 );
             } );
         }
     };

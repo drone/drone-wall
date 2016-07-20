@@ -6,7 +6,7 @@ module.exports = [ "$timeout", function ( $timeout )
         restrict: "A",
         link: function ( scope, element )
         {
-            var successWatch = scope.$watch( "wall.developer.successes", function ( newVal, oldVal )
+            var successWatch = scope.$watch( "developer.successes", function ( newVal, oldVal )
             {
                 if( newVal !== oldVal )
                 {
@@ -21,7 +21,7 @@ module.exports = [ "$timeout", function ( $timeout )
 
             } );
 
-            var failureWatch = scope.$watch( "wall.developer.failures", function ( newVal, oldVal )
+            var failureWatch = scope.$watch( "developer.failures", function ( newVal, oldVal )
             {
                 if( newVal !== oldVal )
                 {

@@ -11,42 +11,6 @@ module.exports = [ "$rootScope", "$q",
             return build.event === "push" && build.message.match( /Merge pull request #([0-9]+)/i );
         };
 
-        var parseBuild = function ( build )
-        {
-            var deferred = $q.defer();
-
-            getDeveloper( build ).then( function ( currentDeveloper )
-            {
-                // Don't give credit for merges
-                if( !checkMerge( build ) && currentDeveloper.username )
-                {
-                    if( build.status === "success" )
-                    {
-                        currentDeveloper.builds++;
-                        currentDeveloper.successes++;
-                        currentDeveloper.rank = currentDeveloper.successes - currentDeveloper.failures;
-                        currentDeveloper.visible = true;
-                    }
-                    else if( build.status === "failure" || build.status === "error" || build.status === "killed" )
-                    {
-                        currentDeveloper.builds++;
-                        currentDeveloper.failures++;
-                        currentDeveloper.rank = currentDeveloper.successes - currentDeveloper.failures;
-                        currentDeveloper.visible = true;
-                    }
-                }
-
-                deferred.resolve( currentDeveloper );
-
-            }, function ()
-            {
-                deferred.resolve( {} );
-
-            } );
-
-            return deferred.promise;
-        };
-
         var getDeveloper = function ( build )
         {
             var deferred = $q.defer();
@@ -94,6 +58,42 @@ module.exports = [ "$rootScope", "$q",
                 buildDeveloper( build );
 
             }
+
+            return deferred.promise;
+        };
+
+        var parseBuild = function ( build )
+        {
+            var deferred = $q.defer();
+
+            getDeveloper( build ).then( function ( currentDeveloper )
+            {
+                // Don't give credit for merges
+                if( !checkMerge( build ) && currentDeveloper.username )
+                {
+                    if( build.status === "success" )
+                    {
+                        currentDeveloper.builds++;
+                        currentDeveloper.successes++;
+                        currentDeveloper.rank = currentDeveloper.successes - currentDeveloper.failures;
+                        currentDeveloper.visible = true;
+                    }
+                    else if( build.status === "failure" || build.status === "error" || build.status === "killed" )
+                    {
+                        currentDeveloper.builds++;
+                        currentDeveloper.failures++;
+                        currentDeveloper.rank = currentDeveloper.successes - currentDeveloper.failures;
+                        currentDeveloper.visible = true;
+                    }
+                }
+
+                deferred.resolve( currentDeveloper );
+
+            }, function ()
+            {
+                deferred.resolve( {} );
+
+            } );
 
             return deferred.promise;
         };

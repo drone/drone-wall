@@ -6,7 +6,7 @@ describe( "The wall should", function ()
     {
         expect( $( ".build-health .build-count .count" ).getText() ).toBe( "25" );
         expect( $( ".build-health .pull-count .count" ).getText() ).toBe( "11" );
-        expect( $( ".build-health .success-fail .build-bar .success" ).getText() ).toBe( "22" );
+        expect( $( ".build-health .success-fail .build-bar .success" ).getText() ).toBe( "21" );
         expect( $( ".build-health .success-fail .build-bar .failure span" ).getText() ).toBe( "2" );
 
         expect( $$( ".latest-builds ol li" ).count() ).toBe( 5 );

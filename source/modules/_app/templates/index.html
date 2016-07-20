@@ -1,16 +1,16 @@
 <!doctype html>
 
-<html lang="en-US" data-ng-app="App">
+<html lang="en-US" ng-app="App">
 
-    <head data-ng-controller="Head as head">
+    <head ng-controller="Head as head">
 
         <meta charset="utf-8">
-        <title data-ng-bind="head.meta.title">Drone Wall</title>
+        <title ng-bind="head.meta.title">Drone Wall</title>
         <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0, width=device-width">
 
         <meta property="{{ property }}" content="{{ content }}"
-            data-ng-repeat="( property, content ) in head.meta.tags"
-            data-ng-if="content">
+            ng-repeat="( property, content ) in head.meta.tags"
+            ng-if="content">
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=LbbXv8woNO">
         <link rel="icon" type="image/png" href="/favicon-32x32.png?v=LbbXv8woNO" sizes="32x32">
@@ -28,9 +28,9 @@
 
     </head>
 
-    <body data-ng-controller="Site as site" data-ng-class="{ dark: site.theme == 'dark' }">
+    <body ng-controller="Site as site" ng-class="{ dark: site.theme == 'dark' }">
 
-        <main data-ng-view data-autoscroll></main>
+        <main ng-view autoscroll></main>
 
         <script src="dist.js" defer></script>
 

@@ -11,6 +11,87 @@ module.exports = [ "$rootScope",
             return build.event === "push" && build.message.match( /Merge pull request #([0-9]+)/i );
         };
 
+        var getPullID = function ( build )
+        {
+            var match;
+
+            if( build.event === "pull_request" )
+            {
+                match = build.ref.match( /refs\/pull\/([0-9]+)\/merge/i );
+                return match ? match[ 1 ] : null;
+            }
+            else if( build.event === "push" )
+            {
+                match = build.message.match( /Merge pull request #([0-9]+)/i );
+                return match ? match[ 1 ] : null;
+            }
+
+            return null;
+        };
+
+        var findRepo = function ( fullName )
+        {
+            for( var i = 0; i < repos.length; i++ )
+            {
+                if( repos[ i ].fullName === fullName )
+                {
+                    return repos[ i ];
+                }
+            }
+
+            return null;
+        };
+
+        var addRepo = function ( build, developer )
+        {
+            var newRepo = {
+                fullName:  build.fullName,
+                name:      build.name,
+                owner:     build.owner,
+                pulls:     [],
+                lastMerge: null,
+                developer: checkMerge( build ) ? developer : {}
+            };
+
+            repos.push( newRepo );
+
+            return newRepo;
+        };
+
+        var findPullIndex = function ( pulls, pull )
+        {
+            for( var i = 0; i < pulls.length; i++ )
+            {
+                if( parseInt( pulls[ i ].pullID, 10 ) === parseInt( pull, 10 ) )
+                {
+                    return i;
+                }
+            }
+
+            return null;
+        };
+
+        var expirePulls = function ()
+        {
+            // Remove pull requests that are inactive for two days, stop-gap until
+            // accessing GitHub API to determine if a pull has been closed
+
+            var pulls;
+
+            for( var i = 0; i < repos.length; i++ )
+            {
+                pulls = repos[ i ].pulls;
+
+                for( var k = 0; k < pulls.length; k++ )
+                {
+                    if( moment().diff( pulls[ k ].updatedAt * 1000, "hours" ) >= 48 )
+                    {
+                        repos[ i ].pulls.splice( k, 1 );
+                    }
+                }
+            }
+        };
+
         var parseBuild = function ( build, developer )
         {
             var currentRepo = findRepo( build.fullName ) || addRepo( build, developer );
@@ -92,87 +173,6 @@ module.exports = [ "$rootScope",
                     }
                 }
 
-            }
-        };
-
-        var getPullID = function ( build )
-        {
-            var match;
-
-            if( build.event === "pull_request" )
-            {
-                match = build.ref.match( /refs\/pull\/([0-9]+)\/merge/i );
-                return match ? match[ 1 ] : null;
-            }
-            else if( build.event === "push" )
-            {
-                match = build.message.match( /Merge pull request #([0-9]+)/i );
-                return match ? match[ 1 ] : null;
-            }
-
-            return null;
-        };
-
-        var findRepo = function ( fullName )
-        {
-            for( var i = 0; i < repos.length; i++ )
-            {
-                if( repos[ i ].fullName === fullName )
-                {
-                    return repos[ i ];
-                }
-            }
-
-            return null;
-        };
-
-        var addRepo = function ( build, developer )
-        {
-            var newRepo = {
-                fullName:  build.fullName,
-                name:      build.name,
-                owner:     build.owner,
-                pulls:     [],
-                lastMerge: null,
-                developer: checkMerge( build ) ? developer : {}
-            };
-
-            repos.push( newRepo );
-
-            return newRepo;
-        };
-
-        var findPullIndex = function ( pulls, pull )
-        {
-            for( var i = 0; i < pulls.length; i++ )
-            {
-                if( parseInt( pulls[ i ].pullID, 10 ) === parseInt( pull, 10 ) )
-                {
-                    return i;
-                }
-            }
-
-            return null;
-        };
-
-        var expirePulls = function ()
-        {
-            // Remove pull requests that are inactive for two days, stop-gap until
-            // accessing GitHub API to determine if a pull has been closed
-
-            var pulls;
-
-            for( var i = 0; i < repos.length; i++ )
-            {
-                pulls = repos[ i ].pulls;
-
-                for( var k = 0; k < pulls.length; k++ )
-                {
-                    if( moment().diff( pulls[ k ].updatedAt * 1000, "hours" ) >= 48 )
-                    {
-                        repos[ i ].pulls.splice( k, 1 );
-                    }
-                }
             }
         };
 

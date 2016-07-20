@@ -96,6 +96,7 @@ module.exports = [
                         {
                             Repos.expirePulls();  // TODO: Hit the GitHub API to remove closed pulls instead
                             ctrl.updating = false;
+                            var i;
 
                             // Scroll the list of repositories when it's long enough
                             if( ctrl.displayRepos && ctrl.displayRepos.length > ctrl.maxRepos )
@@ -121,6 +122,12 @@ module.exports = [
                                         // Append the next repo to the list
                                         ctrl.displayRepos.push( ctrl.workingRepos.shift() );
 
+                                        // Set flags for ordering before animations get a chance to mess them up
+                                        for( i = 0; i < ctrl.displayRepos.length; i++ )
+                                        {
+                                            ctrl.displayRepos[ i ].order = i;
+                                        }
+
                                     }, 0 );
 
                                 }, 2000 );
@@ -129,6 +136,12 @@ module.exports = [
                             {
                                 ctrl.workingRepos = $filter( "orderBy" )( [].concat( ctrl.repos ), "name" );
                                 ctrl.displayRepos = $filter( "orderBy" )( [].concat( ctrl.repos ), "name" );
+
+                                // Set flags for ordering before animations get a chance to mess them up
+                                for( i = 0; i < ctrl.displayRepos.length; i++ )
+                                {
+                                    ctrl.displayRepos[ i ].order = i;
+                                }
                             }
                         };
 
