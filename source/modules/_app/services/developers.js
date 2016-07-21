@@ -6,10 +6,7 @@ module.exports = [ "$rootScope", "$q",
     {
         var developers = [];
 
-        var checkMerge = function ( build )
-        {
-            return build.event === "push" && build.message.match( /Merge pull request #([0-9]+)/i );
-        };
+        var checkMerge = build => build.event === "push" && build.message.match( /Merge pull request #([0-9]+)/i );
 
         var getDeveloper = function ( build )
         {
@@ -112,9 +109,9 @@ module.exports = [ "$rootScope", "$q",
 
         return {
             parseBuild:      parseBuild,
-            getDevelopers:   function () { return developers; },
+            getDevelopers:   () => developers,
             getDeveloper:    getDeveloper,
-            resetDevelopers: function () { developers = []; },
+            resetDevelopers: () => developers = [],
             resetTotals:     resetTotals
         };
 

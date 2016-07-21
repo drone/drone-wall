@@ -55,8 +55,6 @@ angular.module( "App", [
 
 ] )
 
-.constant( "WallTheme", "<< theme >>" )
-
 .controller( "Site", require( "./controllers/site" ) )
 .controller( "Wall", require( "./controllers/wall" ) )
 

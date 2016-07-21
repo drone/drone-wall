@@ -6,10 +6,7 @@ module.exports = [ "$rootScope",
     {
         var repos = [];
 
-        var checkMerge = function ( build )
-        {
-            return build.event === "push" && build.message.match( /Merge pull request #([0-9]+)/i );
-        };
+        var checkMerge = ( build ) => build.event === "push" && build.message.match( /Merge pull request #([0-9]+)/i );
 
         var getPullID = function ( build )
         {
@@ -178,8 +175,8 @@ module.exports = [ "$rootScope",
 
         return {
             parseBuild:  parseBuild,
-            getRepos:    function () { return repos; },
-            resetRepos:  function () { repos = []; },
+            getRepos:    () => repos,
+            resetRepos:  () => repos = [],
             expirePulls: expirePulls
         };
 

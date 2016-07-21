@@ -1,28 +1,40 @@
 "use strict";
 
-module.exports = [ "$location", "DroneAPI",
+module.exports = [ "$rootScope", "$location", "Settings", "DroneAPI",
 
-    function ( $location, DroneAPI )
+    function ( $rootScope, $location, Settings, DroneAPI )
     {
         var ctrl = this;
 
-        ctrl.path  = localStorage.getItem( "path" )  || DroneAPI.rootPath || "";
-        ctrl.token = localStorage.getItem( "token" ) || DroneAPI.getKey() || "";
+        ctrl.settings = angular.copy( Settings );
 
-        ctrl.setConfig = function ( valid )
+        ctrl.toggleTheme = function ( theme )
+        {
+            ctrl.settings.theme = theme;
+            $rootScope.$broadcast( "ChangeTheme", theme );
+        };
+
+        ctrl.saveConfig = function ( valid )
         {
             if( valid )
             {
-                ctrl.path = ctrl.path.substr( -1, 1 ) === "/" || ctrl.path === "" ? ctrl.path : ctrl.path + "/";
+                ctrl.settings.apiRoot = ctrl.settings.apiRoot.substr( -1, 1 ) === "/" ||
+                    ctrl.settings.apiRoot === "" ? ctrl.settings.apiRoot : ctrl.settings.apiRoot + "/";
 
-                localStorage.setItem( "path", ctrl.path );
-                localStorage.setItem( "token", ctrl.token );
+                angular.extend( Settings, ctrl.settings );
+                Settings.save();
 
-                DroneAPI.rootPath = ctrl.path || DroneAPI.rootPath;
-                DroneAPI.setKey( ctrl.token || DroneAPI.getKey() );
+                DroneAPI.rootPath = Settings.apiRoot || DroneAPI.rootPath;
+                DroneAPI.setKey( Settings.token || DroneAPI.getKey() );
 
                 $location.path( "/" );
             }
+        };
+
+        ctrl.cancel = function ()
+        {
+            $rootScope.$broadcast( "ChangeTheme", Settings.theme );
+            $location.path( "/" );
         };
 
     }

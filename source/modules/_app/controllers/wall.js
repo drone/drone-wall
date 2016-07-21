@@ -223,22 +223,10 @@ module.exports = [
 
         // Update running totals
 
-        $rootScope.$on( "newBuild", function ()
-        {
-            ctrl.buildCount++;
-        } );
-
-        $rootScope.$on( "newPull", function ()
-        {
-            ctrl.pullCount++;
-        } );
-
-        $rootScope.$on( "buildSuccess", function ()
-        {
-            ctrl.successCount++;
-        } );
-
-        $rootScope.$on( "buildFailure", function ( event, failedBuild )
+        $rootScope.$on( "newBuild",     () => ctrl.buildCount++ );
+        $rootScope.$on( "newPull",      () => ctrl.pullCount++ );
+        $rootScope.$on( "buildSuccess", () => ctrl.successCount++ );
+        $rootScope.$on( "buildFailure", ( event, failedBuild ) =>
         {
             ctrl.failureCount++;
             ctrl.failDate = failedBuild.updatedAt * 1000;

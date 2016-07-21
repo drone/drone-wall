@@ -4,7 +4,7 @@
 
         <h1><span>Drone</span> <span>Wall</span></h1>
 
-        <form name="configForm" data-ng-submit="config.setConfig( configForm.$valid )" novalidate>
+        <form name="configForm" ng-submit="config.saveConfig( configForm.$valid )" novalidate>
 
             <ol>
                 <li>
@@ -12,11 +12,11 @@
                         Enter your Drone API root path.  We'll be slapping <code>user/feed</code> after it, so provide
                         something like <code>https://drone.yourdomain.com/api/</code>.
                     </label>
-                    <input type="url" name="path" id="path" data-ng-model="config.path" placeholder="api path"
-                         data-ng-class="{ 'error': configForm.path.$invalid && configForm.$submitted }" required>
-                    <div data-ng-messages="configForm.path.$error" data-ng-if="configForm.$submitted">
-                        <div data-ng-message="required">Please enter the API root</div>
-                        <div data-ng-message="url">Please enter a valid URL</div>
+                    <input type="url" name="path" id="path" ng-model="config.settings.apiRoot" placeholder="api path"
+                         ng-class="{ 'error': configForm.path.$invalid && configForm.$submitted }" required>
+                    <div ng-messages="configForm.path.$error" ng-if="configForm.$submitted">
+                        <div ng-message="required">Please enter the API root</div>
+                        <div ng-message="url">Please enter a valid URL</div>
                     </div>
                 </li>
                 <li>
@@ -24,10 +24,10 @@
                         Enter a valid Drone token.  You can find this token by accessing your Drone dashboard, clicking
                         the arrow in the top-right corner, and selecting "profile."
                     </label>
-                    <input type="text" name="token" id="token" data-ng-model="config.token" placeholder="drone token"
-                        data-ng-class="{ 'error': configForm.token.$invalid && configForm.$submitted }" required>
-                    <div data-ng-messages="configForm.token.$error" data-ng-if="configForm.$submitted">
-                        <div data-ng-message="required">Please enter a token</div>
+                    <input type="text" name="token" id="token" ng-model="config.settings.token" placeholder="drone token"
+                        ng-class="{ 'error': configForm.token.$invalid && configForm.$submitted }" required>
+                    <div ng-messages="configForm.token.$error" ng-if="configForm.$submitted">
+                        <div ng-message="required">Please enter a token</div>
                     </div>
                 </li>
                 <li>
@@ -35,15 +35,15 @@
                         Select a theme.
                     </p>
                     <div class="theme">
-                        <a data-ng-click="site.toggleTheme( 'light' )" class="theme-light">light</a>
-                        <a data-ng-click="site.toggleTheme( 'dark' )" class="theme-dark">dark</a>
+                        <a ng-click="config.toggleTheme( 'light' )" class="theme-light">light</a>
+                        <a ng-click="config.toggleTheme( 'dark' )" class="theme-dark">dark</a>
                     </div>
                 </li>
             </ol>
 
             <div class="buttons">
                 <button type="submit">Save</button>
-                <a href="#/">Cancel</a>
+                <a ng-click="config.cancel()">Cancel</a>
             </div>
 
         </form>

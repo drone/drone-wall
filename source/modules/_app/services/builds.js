@@ -55,8 +55,8 @@ module.exports = [ "$rootScope",
 
         return {
             parseBuild:  parseBuild,
-            getBuilds:   function () { return builds; },
-            resetBuilds: function () { builds = []; }
+            getBuilds:   () => builds,
+            resetBuilds: () => builds = []
         };
 
     }

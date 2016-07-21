@@ -1,10 +1,10 @@
 "use strict";
 
-module.exports = [ "API", "DroneAPIRoot", "DroneAPIToken",
+module.exports = [ "API", "Settings",
 
-    function ( API, DroneAPIRoot, DroneAPIToken )
+    function ( API, Settings )
     {
-        var path = localStorage.getItem( "path" ) || DroneAPIRoot;
+        var path = Settings.apiRoot;
         path = path.substr( -1, 1 ) === "/" || path === "" ? path : path + "/";
 
         var apiInterface = new API( {
@@ -12,12 +12,9 @@ module.exports = [ "API", "DroneAPIRoot", "DroneAPIToken",
             unauthorizedInterrupt: false
         } );
 
-        apiInterface.setKey( localStorage.getItem( "token" ) || DroneAPIToken );
+        apiInterface.setKey( Settings.token );
 
-        apiInterface.getLatest = function ()
-        {
-            return apiInterface.$get( "user/feed" );
-        };
+        apiInterface.getLatest = () => apiInterface.$get( "user/feed" );
 
         return apiInterface;
     }

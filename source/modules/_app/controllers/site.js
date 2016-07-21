@@ -1,18 +1,15 @@
 "use strict";
 
-module.exports = [ "WallTheme",
+module.exports = [ "$rootScope", "Settings",
 
-    function ( WallTheme )
+    function ( $rootScope, Settings )
     {
         var ctrl = this;
 
-        ctrl.theme = localStorage.getItem( "theme" ) || WallTheme || "light";
+        ctrl.theme = Settings.theme || "light";
 
-        ctrl.toggleTheme = function ( theme )
-        {
-            ctrl.theme = theme;
-            localStorage.setItem( "theme", theme );
-        };
+        $rootScope.$on( "$routeChangeSuccess", () => ctrl.theme = Settings.theme );
+        $rootScope.$on( "ChangeTheme", ( event, theme ) => ctrl.theme = theme );
 
     }
 

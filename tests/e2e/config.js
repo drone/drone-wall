@@ -17,9 +17,9 @@ describe( "The config page should", function ()
 
         $( "form[name=configForm] button[type=submit]" ).click();
 
-        expect( $( "[data-ng-messages='configForm.path.$error'] [data-ng-message='required']" )
+        expect( $( "[ng-messages='configForm.path.$error'] [ng-message='required']" )
             .isPresent() ).toBe( true );
-        expect( $( "[data-ng-messages='configForm.token.$error'] [data-ng-message='required']" )
+        expect( $( "[ng-messages='configForm.token.$error'] [ng-message='required']" )
             .isPresent() ).toBe( true );
 
     } );
@@ -29,9 +29,9 @@ describe( "The config page should", function ()
         $( "input[id=path]" ).sendKeys( "https://drone.testdomain.com/api/" );
         $( "input[id=token]" ).sendKeys( "abc123" );
 
-        expect( $( "[data-ng-messages='configForm.path.$error'] [data-ng-message='required']" )
+        expect( $( "[ng-messages='configForm.path.$error'] [ng-message='required']" )
             .isPresent() ).toBe( false );
-        expect( $( "[data-ng-messages='configForm.token.$error'] [data-ng-message='required']" )
+        expect( $( "[ng-messages='configForm.token.$error'] [ng-message='required']" )
             .isPresent() ).toBe( false );
 
         $( "form[name=configForm] button[type=submit]" ).click();

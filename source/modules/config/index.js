@@ -22,9 +22,17 @@ angular.module( "Config", [] )
 
 ] )
 
-.constant( "DroneAPIRoot", "<< apiroot >>" )
-.constant( "DroneAPIToken", "<< token >>" )
+.run( [ "Settings",
 
-.controller( "Config", require( "./controllers/config" ) );
+    function ( Settings )
+    {
+        Settings.load();
+    }
+
+] )
+
+.controller( "Config", require( "./controllers/config" ) )
+
+.factory( "Settings", require( "./services/settings" ) );
 
 angular.module( "App" ).requires.push( "Config" );
