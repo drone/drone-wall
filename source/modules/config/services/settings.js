@@ -6,9 +6,10 @@ module.exports = [
     {
         var settings = {
 
-            theme:   "<< theme >>",
-            apiRoot: "<< apiroot >>",
-            token:   "<< token >>",
+            theme:     "<< theme >>",
+            apiRoot:   "<< apiroot >>",
+            token:     "<< token >>",
+            prTimeout: parseInt( "<< prtimeout >>", 10 ),
 
             load: function ()
             {

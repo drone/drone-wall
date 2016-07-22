@@ -13,7 +13,7 @@
                         something like <code>https://drone.yourdomain.com/api/</code>.
                     </label>
                     <input type="url" name="path" id="path" ng-model="config.settings.apiRoot" placeholder="api path"
-                         ng-class="{ 'error': configForm.path.$invalid && configForm.$submitted }" required>
+                        ng-class="{ 'error': configForm.path.$invalid && configForm.$submitted }" required>
                     <div ng-messages="configForm.path.$error" ng-if="configForm.$submitted">
                         <div ng-message="required">Please enter the API root</div>
                         <div ng-message="url">Please enter a valid URL</div>
@@ -40,6 +40,33 @@
                     </div>
                 </li>
             </ol>
+
+            <p class="show-advanced">
+                <a ng-click="config.showAdvanced = !config.showAdvanced">
+                    {{ config.showAdvanced ? "Hide" : "Show" }} advanced settings
+                    <i class="fa fa-chevron-right" ng-class="{ 'fa-rotate-90': config.showAdvanced }"></i>
+                </a>
+            </p>
+
+            <section class="advanced" ng-show="config.showAdvanced">
+
+                <ul>
+
+                    <li>
+                        <label for="prtimeout">
+                            Pull requests that aren't merged will be hidden after this many hours.
+                        </label>
+                        <input type="number" name="prtimeout" id="prtimeout" ng-model="config.settings.prTimeout"
+                            placeholder="default: 48" min="0" max="8760"
+                            ng-class="{ 'error': configForm.prtimeout.$invalid && configForm.$submitted }">
+                        <div ng-messages="configForm.prtimeout.$error" ng-if="configForm.$submitted">
+                            <div ng-message="number">Please enter only numeric values</div>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </section>
 
             <div class="buttons">
                 <button type="submit">Save</button>

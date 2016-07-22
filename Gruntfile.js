@@ -6,9 +6,10 @@ module.exports = function ( grunt )
     var env    = grunt.option( "env" ) || "local";
     var envObj = grunt.file.readJSON( "env.json" )[ env ];
 
-    envObj.apiroot = grunt.option( "apiroot" ) || envObj.apiroot || "";
-    envObj.token   = grunt.option( "token" )   || "";
-    envObj.theme   = grunt.option( "theme" )   || "light";
+    envObj.apiroot   = grunt.option( "apiroot" )   || envObj.apiroot || "";
+    envObj.token     = grunt.option( "token" )     || "";
+    envObj.theme     = grunt.option( "theme" )     || "light";
+    envObj.prtimeout = grunt.option( "prtimeout" ) || 48;
 
     grunt.initConfig( {
         env: envObj,

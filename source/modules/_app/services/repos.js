@@ -1,8 +1,8 @@
 "use strict";
 
-module.exports = [ "$rootScope",
+module.exports = [ "$rootScope", "Settings",
 
-    function ( $rootScope )
+    function ( $rootScope, Settings )
     {
         var repos = [];
 
@@ -70,7 +70,7 @@ module.exports = [ "$rootScope",
 
         var expirePulls = function ()
         {
-            // Remove pull requests that are inactive for two days, stop-gap until
+            // Remove pull requests that are inactive for some time, stop-gap until
             // accessing GitHub API to determine if a pull has been closed
 
             var pulls;
@@ -81,7 +81,7 @@ module.exports = [ "$rootScope",
 
                 for( var k = 0; k < pulls.length; k++ )
                 {
-                    if( moment().diff( pulls[ k ].updatedAt * 1000, "hours" ) >= 48 )
+                    if( moment().diff( pulls[ k ].updatedAt * 1000, "hours" ) >= Settings.prTimeout )
                     {
                         repos[ i ].pulls.splice( k, 1 );
                     }

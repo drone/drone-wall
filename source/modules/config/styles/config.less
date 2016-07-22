@@ -75,6 +75,7 @@
             padding: 0 10px;
             border: 1px solid @white;
             border-radius: 4px;
+            outline: none;
             font-size: 18px;
             line-height: 38px;
             color: @blackish;
@@ -127,6 +128,53 @@
                     border-radius: 0 4px 4px 0;
                     background-color: @blackish;
                     color: @white;
+                }
+
+            }
+
+        }
+
+        .show-advanced {
+
+            margin-top: 20px;
+
+            a {
+
+                color: @blue;
+                cursor: pointer;
+
+                .fa {
+                    transition: all linear .1s;
+                    font-size: 12px;
+                }
+
+            }
+
+        }
+
+        .advanced {
+
+            margin-top: 20px;
+
+            & > ul {
+
+                & > li {
+
+                    position: relative;
+
+                    & + li {
+                        margin-top: 30px;
+                    }
+
+                    label,
+                    p {
+                        display: block;
+                        margin-bottom: 10px;
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: 300;
+                    }
+
                 }
 
             }
@@ -233,6 +281,16 @@
                     margin-bottom: 10px;
                     font-size: 14px;
                     line-height: 20px;
+                    font-weight: 400;
+                }
+
+            }
+
+            .advanced ul li {
+
+                label,
+                p {
+                    margin-bottom: 10px;
                     font-weight: 400;
                 }
 
