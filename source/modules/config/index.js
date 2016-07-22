@@ -33,6 +33,14 @@ angular.module( "Config", [] )
 
 .controller( "Config", require( "./controllers/config" ) )
 
-.factory( "Settings", require( "./services/settings" ) );
+.factory( "Settings", require( "./services/settings" ) )
+
+.constant( "Defaults", {
+    apiRoot:   "<< apiroot >>",
+    token:     "<< token >>",
+    theme:     "<< theme >>",
+    prTimeout: parseInt( "<< prtimeout >>", 10 ),
+    prMax:     parseInt( "<< prmax >>", 10 )
+} );
 
 angular.module( "App" ).requires.push( "Config" );

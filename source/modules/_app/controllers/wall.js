@@ -1,9 +1,9 @@
 "use strict";
 
-module.exports = [
-    "$rootScope", "$timeout", "$interval", "$filter", "$q", "toastr", "DroneAPI", "Repos", "Builds", "Developers",
+module.exports = [ "$rootScope", "$timeout", "$interval", "$filter", "$q",
+    "toastr", "Settings", "DroneAPI", "Repos", "Builds", "Developers",
 
-    function ( $rootScope, $timeout, $interval, $filter, $q, toastr, DroneAPI, Repos, Builds, Developers )
+    function ( $rootScope, $timeout, $interval, $filter, $q, toastr, Settings, DroneAPI, Repos, Builds, Developers )
     {
         var ctrl = this;
 
@@ -17,6 +17,7 @@ module.exports = [
         ctrl.workingRepos = [];
 
         ctrl.maxRepos   = 8;
+        ctrl.maxPulls   = Settings.prMax;
         ctrl.maxBuilds  = 5;
         ctrl.maxLeaders = 4;
 
@@ -60,7 +61,7 @@ module.exports = [
 
                     if( angular.isArray( builds ) )
                     {
-                        // Store the time of the most recent state change
+                        // Store the time of the most recent state change, flag working builds for sorting
                         builds = builds.map( function ( build )
                         {
                             build.updatedAt = Math.max(
@@ -69,6 +70,7 @@ module.exports = [
                                 build.startedAt  || 0,
                                 build.finishedAt || 0
                             );
+                            build.working = build.finishedAt === 0 ? 1 : 0;
 
                             return build;
                         } );

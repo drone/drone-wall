@@ -1,19 +1,14 @@
 "use strict";
 
-module.exports = [
+module.exports = [ "Defaults",
 
-    function ()
+    function ( Defaults )
     {
         var settings = {
 
-            theme:     "<< theme >>",
-            apiRoot:   "<< apiroot >>",
-            token:     "<< token >>",
-            prTimeout: parseInt( "<< prtimeout >>", 10 ),
-
             load: function ()
             {
-                angular.extend( settings, angular.fromJson( localStorage.getItem( "settings" ) ) );
+                angular.extend( settings, Defaults, angular.fromJson( localStorage.getItem( "settings" ) ) );
             },
 
             save: function ()

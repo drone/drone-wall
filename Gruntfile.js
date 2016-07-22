@@ -10,6 +10,7 @@ module.exports = function ( grunt )
     envObj.token     = grunt.option( "token" )     || "";
     envObj.theme     = grunt.option( "theme" )     || "light";
     envObj.prtimeout = grunt.option( "prtimeout" ) || 48;
+    envObj.prmax     = grunt.option( "prmax" )     || 3;
 
     grunt.initConfig( {
         env: envObj,

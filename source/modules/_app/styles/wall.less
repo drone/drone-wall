@@ -136,7 +136,6 @@ aside.config {
             }
 
             .no-author {
-                transition: all ease 1s;
                 position: relative;
                 z-index: 6;
                 display: inline-block;
@@ -262,6 +261,33 @@ aside.config {
                 &.failure,
                 &.failure:before,
                 &.failure .pull-author { background-color: @red; }
+
+                &.more {
+
+                    &::before {
+                        background-color: @brown;
+                    }
+
+                    .pull-author {
+
+                        background-color: @brown;
+
+                        .no-author {
+
+                            font-size: 40px;
+                            font-weight: 700;
+
+                            i {
+                                position: relative;
+                                top: -4px;
+                                font-size: 25px;
+                            }
+
+                        }
+
+                    }
+
+                }
 
             }
 
@@ -738,6 +764,10 @@ h1.bar {
             &.killed .pull-author,
             &.failure .pull-author { background-color: @red; }
 
+            &.more .pull-author {
+                background-color: @brown;
+            }
+
         }
 
     }
@@ -1025,4 +1055,5 @@ h1.bar {
         }
 
     }
+
 }

@@ -57,10 +57,26 @@
                             Pull requests that aren't merged will be hidden after this many hours.
                         </label>
                         <input type="number" name="prtimeout" id="prtimeout" ng-model="config.settings.prTimeout"
-                            placeholder="default: 48" min="0" max="8760"
+                            placeholder="default: {{ config.defaults.prTimeout }}" min="0" max="8760"
                             ng-class="{ 'error': configForm.prtimeout.$invalid && configForm.$submitted }">
                         <div ng-messages="configForm.prtimeout.$error" ng-if="configForm.$submitted">
                             <div ng-message="number">Please enter only numeric values</div>
+                            <div ng-message="min">Please only enter values greater than or equal to 0</div>
+                            <div ng-message="max">Please only enter values less than or equal to 8760 (1 year)</div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <label for="prmax">
+                            Repos in the repo list will display at maximum this number of pull requests.
+                        </label>
+                        <input type="number" name="prmax" id="prmax" ng-model="config.settings.prMax"
+                            placeholder="default: {{ config.defaults.prMax }}" min="1" max="20"
+                            ng-class="{ 'error': configForm.prmax.$invalid && configForm.$submitted }">
+                        <div ng-messages="configForm.prmax.$error" ng-if="configForm.$submitted">
+                            <div ng-message="number">Please enter only numeric values</div>
+                            <div ng-message="min">Please only enter values greater than 0</div>
+                            <div ng-message="max">Please only enter values less than or equal to 20</div>
                         </div>
                     </li>
 

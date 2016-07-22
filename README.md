@@ -27,6 +27,8 @@ You can further customize the Wall's default appearance with these options:
 
 * **prtimeout**: `[Number]` Defaults to `48`.  The number of hours before an un-merged pull request is hidden in the repo list.  Useful for removing stale pull requests that have been closed without being merged.
 
+* **prmax**: `[Number]` Defaults to `3`.  The maximum number of pull requests to display on a repo in the repo list before hiding extras.
+
 With the exception of `env`, all configuration values can be changed via the Wall interface at any time.  Once set, they'll be stored in localstorage so you don't have to reenter them.
 
 ## Local Development

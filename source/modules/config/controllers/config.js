@@ -1,12 +1,13 @@
 "use strict";
 
-module.exports = [ "$rootScope", "$location", "Settings", "DroneAPI",
+module.exports = [ "$rootScope", "$location", "Defaults", "Settings", "DroneAPI",
 
-    function ( $rootScope, $location, Settings, DroneAPI )
+    function ( $rootScope, $location, Defaults, Settings, DroneAPI )
     {
         var ctrl = this;
 
         ctrl.settings = angular.copy( Settings );
+        ctrl.defaults = Defaults;
 
         ctrl.toggleTheme = function ( theme )
         {
@@ -20,6 +21,10 @@ module.exports = [ "$rootScope", "$location", "Settings", "DroneAPI",
             {
                 ctrl.settings.apiRoot = ctrl.settings.apiRoot.substr( -1, 1 ) === "/" ||
                     ctrl.settings.apiRoot === "" ? ctrl.settings.apiRoot : ctrl.settings.apiRoot + "/";
+
+                ctrl.settings.theme     = ctrl.settings.theme     || Defaults.theme;
+                ctrl.settings.prTimeout = ctrl.settings.prTimeout || Defaults.prTimeout;
+                ctrl.settings.prMax     = ctrl.settings.prMax     || Defaults.prMax;
 
                 angular.extend( Settings, ctrl.settings );
                 Settings.save();

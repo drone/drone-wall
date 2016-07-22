@@ -6,7 +6,7 @@ module.exports = [ "$rootScope", "Settings",
     {
         var ctrl = this;
 
-        ctrl.theme = Settings.theme || "light";
+        ctrl.theme = Settings.theme;
 
         $rootScope.$on( "$routeChangeSuccess", () => ctrl.theme = Settings.theme );
         $rootScope.$on( "ChangeTheme", ( event, theme ) => ctrl.theme = theme );

@@ -110,11 +110,17 @@
                 </div>
 
                 <ul class="pull-requests">
-                    <li ng-repeat="pull in repo.pulls | filter: { merging: false }" class="{{ pull.status }}">
+                    <li ng-repeat="pull in repo.pulls | filter: { merging: false } | orderBy: [ '-working', '-updatedAt' ] | limitTo: wall.maxPulls"
+                        class="{{ pull.status }}">
                         <div class="pull-author">
                             <img ng-src="{{ pull.developer.avatar }}" ng-if="pull.developer.avatar">
                             <span class="no-author" ng-if="!pull.developer.avatar"><i class="fa fa-user"></i></span>
                             <i class="fa fa-circle-o-notch fa-spin" ng-if="pull.status === 'running'"></i>
+                        </div>
+                    </li>
+                    <li class="more" ng-if="( repo.pulls | filter: { merging: false } ).length > wall.maxPulls">
+                        <div class="pull-author">
+                            <span class="no-author"><i class="fa fa-plus"></i>{{ ( repo.pulls | filter: { merging: false } ).length - wall.maxPulls }}</span>
                         </div>
                     </li>
                 </ul>

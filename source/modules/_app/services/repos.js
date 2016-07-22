@@ -117,8 +117,9 @@ module.exports = [ "$rootScope", "Settings",
                     // Update status if all active builds have completed
                     currentPull.status     = currentPull.buildCount > 0 ? currentPull.status : build.status;
 
-                    // Always update the updated time
+                    // Always update the updated time and working status
                     currentPull.updatedAt  = build.updatedAt;
+                    currentPull.working    = build.working;
                 }
                 else
                 {
