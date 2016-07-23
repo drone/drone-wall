@@ -4,14 +4,14 @@
 @import (inline) "@{nodeModules}css-reset/reset.css";
 @import (inline) "@{nodeModules}angular-toastr/dist/angular-toastr.css";
 
-@import "variables";
+@import "colors";
 
 * {
     box-sizing: border-box;
 }
 
 body {
-    background-color: @gray;
+    background-color: @bgLight;
 }
 
 main {
@@ -37,7 +37,7 @@ main {
     .toast {
 
         width: ~"calc( 100% - 40px )";
-        background-color: @red;
+        background-color: @failure;
 
         a {
             display: block;

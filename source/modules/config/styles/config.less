@@ -21,7 +21,7 @@
             font-weight: 300;
 
             span:last-child {
-                color: @green;
+                color: @orgName;
                 font-weight: 400;
             }
 
@@ -43,7 +43,7 @@
                     top: -28px;
                     width: 80px;
                     height: 80px;
-                    background-color: @grayDark;
+                    background-color: @shadeDark;
                     border-radius: 80px;
                     line-height: 80px;
                     text-align: center;
@@ -78,15 +78,15 @@
             outline: none;
             font-size: 18px;
             line-height: 38px;
-            color: @blackish;
+            color: @black;
 
             &::placeholder {
                 opacity: .4;
-                color: @grayDark;
+                color: @shadeDark;
             }
 
             &.error {
-                border-color: @red;
+                border-color: @failure;
             }
 
         }
@@ -94,7 +94,7 @@
         [ng-message] {
             margin-top: 10px;
             padding-left: 11px;
-            color: @red;
+            color: @failure;
         }
 
         .theme {
@@ -115,18 +115,18 @@
                 cursor: pointer;
 
                 &.theme-light {
-                    border: 1px solid @blackish;
+                    border: 1px solid @black;
                     border-right: none;
                     border-radius: 4px 0 0 4px;
                     background-color: @white;
                     font-weight: 700;
-                    color: @blackish;
+                    color: @black;
                 }
                 &.theme-dark {
-                    border: 1px solid @blackish;
+                    border: 1px solid @black;
                     border-left: none;
                     border-radius: 0 4px 4px 0;
-                    background-color: @blackish;
+                    background-color: @black;
                     color: @white;
                 }
 
@@ -140,7 +140,7 @@
 
             a {
 
-                color: @blue;
+                color: @link;
                 cursor: pointer;
 
                 .fa {
@@ -194,7 +194,7 @@
                 border: none;
                 border-radius: 4px;
                 outline: none;
-                background-color: @green;
+                background-color: @success;
                 font-size: 18px;
                 font-weight: 700;
                 line-height: 40px;
@@ -202,11 +202,18 @@
             }
             a {
                 cursor: pointer;
-                color: @blackish;
+                color: @black;
             }
 
         }
 
+    }
+
+    &.show-advanced {
+        position: static;
+        top: 0;
+        transform: translateY( 0 );
+        margin: 40px 0;
     }
 
 }
@@ -230,13 +237,19 @@
 
 }
 
-@media( max-height: 650px )
+@media( max-height: 680px )
 {
     .wall-config {
+
         position: static;
         top: 0;
         transform: translateY( 0 );
-        margin: 20px 0 40px;
+        margin: 20px 0;
+
+        &.show-advanced {
+            margin: 20px 0;
+        }
+
     }
 }
 @media( max-width: 766px )
@@ -247,6 +260,10 @@
         top: 0;
         transform: translateY( 0 );
         margin: 20px 0 40px;
+
+        &.show-advanced {
+            margin: 20px 0;
+        }
 
         & > div {
             margin: 0 83px;

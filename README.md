@@ -13,6 +13,8 @@ Drone Wall uses [Grunt](http://gruntjs.com/) to construct an entirely client-sid
 grunt --env=<env> --apiroot=<path> --token=<token> ... [full list below]
 ````
 
+The default values for most of these options can be found in `env.json`, and can be modified there directly if you prefer to not have to pass them in via command-line every time.  Additionally, with the exception of `env` and `colors`, all configuration values can be changed via the Wall interface at any time.  Once set, they'll be stored in localstorage so you don't have to reenter them.
+
 * **env**: `[local|dev|staging|prod]` Defaults to `local`.  Selects which group of configuration variables in `env.json` are used for further tasks.  Implicitly enables mock data when set to `local`, and minifies/uglifies all scripts when set to `staging` or `prod`.
 
 * **apiroot**: `[String]` The absolute path of where your Drone API lives.  Should be something like `https://drone.something.com/api/`.
@@ -23,13 +25,15 @@ grunt --env=<env> --apiroot=<path> --token=<token> ... [full list below]
 
 You can further customize the Wall's default appearance with these options:
 
-* **theme**: `[light|dark]` Defaults to `light`.  Determines whether the Wall is displayed using the light or dark theme.
-
 * **prtimeout**: `[Number]` Defaults to `48`.  The number of hours before an un-merged pull request is hidden in the repo list.  Useful for removing stale pull requests that have been closed without being merged.
 
 * **prmax**: `[Number]` Defaults to `3`.  The maximum number of pull requests to display on a repo in the repo list before hiding extras.
 
-The default values for these options can be found in `env.json`, and can be modified there directly if you prefer to not have to pass them in via command-line every time.  Additionally, with the exception of `env`, all configuration values can be changed via the Wall interface at any time.  Once set, they'll be stored in localstorage so you don't have to reenter them.
+* **orgname**: `[String]` Defaults to `Drone`.  This is the name that appears on the config page, and can be replaced with your own organization's name.
+
+* **theme**: `[light|dark]` Defaults to `light`.  Determines whether the Wall is displayed using the light or dark theme.
+
+* **colors**: `[Object]` The default Wall color scheme is defined in `/source/modules/_app/styles/colors.less`.  You can pass a JSON object with properties that match the LESS variable names (sans the @s) to override some or all of these colors, ala `-colors="{\"success\":\"#00FF00\"}"`.  Note the need to use double-quotes, and escape the innermost ones.  This option's much easier to set via `env.json`, where you can just use an un-escaped object literal.
 
 ## Local Development
 
@@ -53,7 +57,7 @@ grunt deploy --env=prod --aws-access-key-id=<id> --aws-secret-access-key=<key>
 
 The AWS access key ID and secret access key should belong to an AWS user created via Identity and Access Management that has been granted the `AmazonS3FullAccess` and `CloudFrontFullAccess` policies.  You'll be given these values when you first create a user.
 
-Be sure to set `apiroot`, `token`, or `theme` in the deploy command as appropriate.  Deployment should only take a few seconds, but building on AWS's end can take upwards of ten minutes.
+Be sure to set `apiroot`, `token`, or any other configuration values in the deploy command as appropriate.  Deployment should only take a few seconds, but building on AWS's end can take upwards of ten minutes.
 
 You can also just run `grunt` with the appropriate `env` value to export the full site to your `/build` directory, and manually deploy its contents to whatever web hosting solution you prefer.
 

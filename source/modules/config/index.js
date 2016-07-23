@@ -38,9 +38,10 @@ angular.module( "Config", [] )
 .constant( "Defaults", {
     apiRoot:   "<< apiroot >>",
     token:     "<< token >>",
-    theme:     "<< theme >>",
     prTimeout: parseInt( "<< prtimeout >>", 10 ),
-    prMax:     parseInt( "<< prmax >>", 10 )
+    prMax:     parseInt( "<< prmax >>", 10 ),
+    orgName:   "<< orgname >>",
+    theme:     "<< theme >>"
 } );
 
 angular.module( "App" ).requires.push( "Config" );

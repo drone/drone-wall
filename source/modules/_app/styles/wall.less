@@ -42,7 +42,7 @@ aside.config {
         line-height: 32px;
         text-align: center;
         font-size: 32px;
-        color: @grayDark;
+        color: @shadeDark;
         cursor: pointer;
     }
 
@@ -103,18 +103,18 @@ aside.config {
         background-color: @white;
         border-radius: 4px;
         box-shadow: -1px 1px 5px 0px rgba( 0, 0, 0, .4 );
-        color: @grayDark;
+        color: @shadeDark;
 
         &.leave {
             transition: transform ease 1.2s, opacity ease .5s;
             opacity: 0;
         }
         &.pending,
-        &.running { background-color: @blue; color: @white; }
-        &.success { background-color: @green; color: @white; }
+        &.running { background-color: @running; color: @white; }
+        &.success { background-color: @success; color: @white; }
         &.error,
         &.killed,
-        &.failure { background-color: @red; color: @white; }
+        &.failure { background-color: @failure; color: @white; }
 
         .author {
 
@@ -131,7 +131,7 @@ aside.config {
                 width: 90px;
                 height: 90px;
                 border-radius: 90px;
-                background-color: @gray;
+                background-color: @shade;
                 box-shadow: -2px 2px 4px rgba( 0, 0, 0, .3 );
             }
 
@@ -142,11 +142,11 @@ aside.config {
                 width: 90px;
                 height: 90px;
                 border-radius: 90px;
-                background-color: @gray;
+                background-color: @shade;
                 text-align: center;
                 line-height: 90px;
                 font-size: 50px;
-                color: @grayDark;
+                color: @shadeDark;
             }
 
             .fa-circle-o-notch {
@@ -156,7 +156,7 @@ aside.config {
                 height: 100px;
                 line-height: normal;
                 font-size: 100px;
-                color: @yellow;
+                color: @spinner;
             }
 
         }
@@ -221,7 +221,7 @@ aside.config {
                     left: -30px;
                     width: 130px;
                     height: 130px;
-                    background-color: @gray;
+                    background-color: @shade;
                     border-radius: 120px;
                     box-shadow: 0px 0px 10px 0px rgba(0,0,0,.6)
                 }
@@ -234,7 +234,7 @@ aside.config {
                     width: 130px;
                     height: 110px;
                     padding: 10px 20px 10px 0px;
-                    background-color: @gray;
+                    background-color: @shade;
                     border-radius: 120px 0 0 120px;
                 }
 
@@ -245,13 +245,13 @@ aside.config {
 
                 &.pending,
                 &.pending:before,
-                &.pending .pull-author { background-color: @blue; }
+                &.pending .pull-author { background-color: @running; }
                 &.running,
                 &.running:before,
-                &.running .pull-author { background-color: @blue; }
+                &.running .pull-author { background-color: @running; }
                 &.success,
                 &.success:before,
-                &.success .pull-author { background-color: @green; }
+                &.success .pull-author { background-color: @success; }
                 &.error,
                 &.error:before,
                 &.error .pull-author,
@@ -260,17 +260,17 @@ aside.config {
                 &.killed .pull-author,
                 &.failure,
                 &.failure:before,
-                &.failure .pull-author { background-color: @red; }
+                &.failure .pull-author { background-color: @failure; }
 
                 &.more {
 
                     &::before {
-                        background-color: @brown;
+                        background-color: @overflow;
                     }
 
                     .pull-author {
 
-                        background-color: @brown;
+                        background-color: @overflow;
 
                         .no-author {
 
@@ -301,7 +301,7 @@ aside.config {
                 z-index: 6;
                 width: 90px;
                 height: 90px;
-                background-color: @gray;
+                background-color: @shade;
                 border-radius: 90px;
             }
 
@@ -313,11 +313,11 @@ aside.config {
                 width: 90px;
                 height: 90px;
                 border-radius: 90px;
-                background-color: @gray;
+                background-color: @shade;
                 text-align: center;
                 line-height: 90px;
                 font-size: 50px;
-                color: @grayDark;
+                color: @shadeDark;
             }
 
             .fa-circle-o-notch {
@@ -327,7 +327,7 @@ aside.config {
                 height: 100px;
                 line-height: normal;
                 font-size: 100px;
-                color: @yellow;
+                color: @spinner;
             }
 
         }
@@ -350,8 +350,8 @@ img.builder {
     font-size: 31px;
     font-weight: 300;
 
-    .good { font-weight: 700; color: @green; }
-    .bad { font-weight: 700; color: @red; }
+    .good { font-weight: 700; color: @success; }
+    .bad { font-weight: 700; color: @failure; }
 
 }
 
@@ -359,7 +359,7 @@ h1.bar {
 
     padding: 11px 12px;
     margin-bottom: 20px;
-    background-color: @grayDark;
+    background-color: @shadeDark;
     border-radius: 4px;
     font-size: 28px;
     color: @white;
@@ -433,7 +433,7 @@ h1.bar {
                 padding-left: 10px;
                 text-align: left;
                 line-height: 50px;
-                background-color: @green;
+                background-color: @success;
                 font-size: 34px;
                 font-weight: 700;
                 color: @white;
@@ -449,7 +449,7 @@ h1.bar {
                 padding-right: 10px;
                 text-align: right;
                 line-height: 50px;
-                background-color: @red;
+                background-color: @failure;
                 font-size: 34px;
                 font-weight: 700;
                 color: @white;
@@ -460,13 +460,13 @@ h1.bar {
             }
 
             .success.zero {
-                background-color: @red;
+                background-color: @failure;
             }
             .failure.zero {
-                background-color: @green;
+                background-color: @success;
             }
             .failure.zero:before {
-                border-bottom: 50px solid @green;
+                border-bottom: 50px solid @success;
             }
 
         }
@@ -481,7 +481,7 @@ h1.bar {
             width: 0;
             height: 0;
             border: 50px solid transparent;
-            border-bottom: 50px solid @red;
+            border-bottom: 50px solid @failure;
         }
 
     }
@@ -538,18 +538,18 @@ h1.bar {
                 left: 80px;
                 width: 50px;
                 height: 50px;
-                background-color: @gray;
+                background-color: @shade;
                 border-radius: 50px;
                 box-shadow: -1px 1px 5px 0px rgba( 0, 0, 0, .4 );
                 line-height: 50px;
                 text-align: center;
                 font-size: 28px;
-                color: @grayDark;
+                color: @shadeDark;
 
                 &:nth-of-type( 1 ) { top: -10px; }
                 &:nth-of-type( 2 ) { bottom: -10px; }
-                &.successes { background-color: @green; color: @white; }
-                &.failures { background-color: @red; color: @white; }
+                &.successes { background-color: @success; color: @white; }
+                &.failures { background-color: @failure; color: @white; }
 
             }
             &.success-pop span.successes { transform: scale( 1.2 ); }
@@ -583,14 +583,14 @@ h1.bar {
         background-color: @white;
         border-radius: 4px;
         box-shadow: -1px 1px 3px rgba( 0, 0, 0, .3 );
-        color: @grayDark;
+        color: @shadeDark;
 
         &.pending,
-        &.running { background-color: @blue; color: @white; }
-        &.success { color: @green; }
+        &.running { background-color: @running; color: @white; }
+        &.success { color: @success; }
         &.error,
         &.killed,
-        &.failure { background-color: @red; color: @white; }
+        &.failure { background-color: @failure; color: @white; }
         &.ng-enter {
             transition: all ease 1s;
             transform: scale( .9, .9 );
@@ -627,7 +627,7 @@ h1.bar {
                 width: 74px;
                 height: 74px;
                 border-radius: 74px;
-                background-color: @gray;
+                background-color: @shade;
                 box-shadow: -1px 1px 3px rgba( 0, 0, 0, .3 );
             }
 
@@ -639,11 +639,11 @@ h1.bar {
                 width: 80px;
                 height: 80px;
                 border-radius: 80px;
-                background-color: @gray;
+                background-color: @shade;
                 text-align: center;
                 line-height: 80px;
                 font-size: 40px;
-                color: @grayDark;
+                color: @shadeDark;
             }
 
             .fa-circle-o-notch {
@@ -653,7 +653,7 @@ h1.bar {
                 height: 80px;
                 line-height: normal;
                 font-size: 80px;
-                color: @yellow;
+                color: @spinner;
             }
 
         }
@@ -681,7 +681,7 @@ h1.bar {
             white-space: nowrap;
             text-overflow: ellipsis;
             font-size: 18px;
-            color: @grayDark;
+            color: @shadeDark;
         }
         .when {
             transition: color ease .3s;
@@ -690,7 +690,7 @@ h1.bar {
             right: 15px;
             line-height: 14px;
             font-size: 14px;
-            color: @grayDark;
+            color: @shadeDark;
         }
         .when.ng-leave,
         .when.ng-leave-active { display: none; }
@@ -701,7 +701,7 @@ h1.bar {
             right: 15px;
             line-height: 14px;
             font-size: 14px;
-            color: @grayDark;
+            color: @shadeDark;
         }
 
         &.pending .name,
@@ -734,20 +734,20 @@ h1.bar {
 
 .dark {
 
-    background-color: @blackish;
+    background-color: @bgDark;
 
-    main > section { color: @gray; }
+    main > section { color: @shade; }
 
     .repos > li {
 
-        background-color: @gray;
+        background-color: @shade;
 
         &.pending,
-        &.running { background-color: @blue; }
-        &.success { background-color: @green; }
+        &.running { background-color: @running; }
+        &.success { background-color: @success; }
         &.error,
         &.killed,
-        &.failure { background-color: @red; }
+        &.failure { background-color: @failure; }
 
         .author img,
         .author .no-author { background-color: @white; }
@@ -757,15 +757,15 @@ h1.bar {
 
         .pull-requests > li {
 
-            &.pending .pull-author { background-color: @blue; }
-            &.running .pull-author { background-color: @blue; }
-            &.success .pull-author { background-color: @green; }
+            &.pending .pull-author { background-color: @running; }
+            &.running .pull-author { background-color: @running; }
+            &.success .pull-author { background-color: @success; }
             &.error .pull-author,
             &.killed .pull-author,
-            &.failure .pull-author { background-color: @red; }
+            &.failure .pull-author { background-color: @failure; }
 
             &.more .pull-author {
-                background-color: @brown;
+                background-color: @overflow;
             }
 
         }
@@ -775,17 +775,17 @@ h1.bar {
     .column:after {
         background: linear-gradient( to bottom, rgba( 34, 34, 34, 0 ) 0%, rgba( 34, 34, 34, 1 ) 70% );
     }
-    h1.bar { background-color: @grayDark; }
+    h1.bar { background-color: @shadeDark; }
 
     .latest-builds ol li {
 
-        background-color: @gray;
+        background-color: @shade;
 
         &.pending,
-        &.running { background-color: @blue; }
+        &.running { background-color: @running; }
         &.error,
         &.killed,
-        &.failure { background-color: @red; }
+        &.failure { background-color: @failure; }
 
         .author img,
         .author .no-author { background-color: @white; }

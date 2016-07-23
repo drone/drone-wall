@@ -25,6 +25,7 @@ module.exports = [ "$rootScope", "$location", "Defaults", "Settings", "DroneAPI"
                 ctrl.settings.theme     = ctrl.settings.theme     || Defaults.theme;
                 ctrl.settings.prTimeout = ctrl.settings.prTimeout || Defaults.prTimeout;
                 ctrl.settings.prMax     = ctrl.settings.prMax     || Defaults.prMax;
+                ctrl.settings.orgName   = ctrl.settings.orgName   || Defaults.orgName;
 
                 angular.extend( Settings, ctrl.settings );
                 Settings.save();

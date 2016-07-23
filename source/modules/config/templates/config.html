@@ -1,8 +1,8 @@
-<section class="wall-config">
+<section class="wall-config" ng-class="{ 'show-advanced': config.showAdvanced }">
 
     <div>
 
-        <h1><span>Drone</span> <span>Wall</span></h1>
+        <h1><span>{{ config.settings.orgName || config.defaults.orgName }}</span> <span>Wall</span></h1>
 
         <form name="configForm" ng-submit="config.saveConfig( configForm.$valid )" novalidate>
 
@@ -78,6 +78,14 @@
                             <div ng-message="min">Please only enter values greater than 0</div>
                             <div ng-message="max">Please only enter values less than or equal to 20</div>
                         </div>
+                    </li>
+
+                    <li>
+                        <label for="orgname">
+                            This is the organization name that appears at the top of this config screen.
+                        </label>
+                        <input type="text" name="orgname" id="orgname" ng-model="config.settings.orgName"
+                            placeholder="default: {{ config.defaults.orgName }}">
                     </li>
 
                 </ul>

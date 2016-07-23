@@ -8,9 +8,11 @@ module.exports = function ( grunt )
 
     envObj.apiroot   = grunt.option( "apiroot" )   || envObj.apiroot;
     envObj.token     = grunt.option( "token" )     || envObj.token;
-    envObj.theme     = grunt.option( "theme" )     || envObj.theme;
     envObj.prtimeout = grunt.option( "prtimeout" ) || envObj.prtimeout;
     envObj.prmax     = grunt.option( "prmax" )     || envObj.prmax;
+    envObj.orgname   = grunt.option( "orgname" )   || envObj.orgname;
+    envObj.theme     = grunt.option( "theme" )     || envObj.theme;
+    envObj.colors    = JSON.parse( grunt.option( "colors" ) || "null" ) || envObj.colors;
 
     grunt.initConfig( {
         env: envObj,

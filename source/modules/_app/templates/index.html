@@ -28,7 +28,7 @@
 
     </head>
 
-    <body ng-controller="Site as site" ng-class="{ dark: site.theme == 'dark' }">
+    <body ng-controller="Site as site" ng-class="{ 'dark': site.theme === 'dark' }">
 
         <main ng-view autoscroll></main>
 
