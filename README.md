@@ -29,7 +29,7 @@ You can further customize the Wall's default appearance with these options:
 
 * **prmax**: `[Number]` Defaults to `3`.  The maximum number of pull requests to display on a repo in the repo list before hiding extras.
 
-With the exception of `env`, all configuration values can be changed via the Wall interface at any time.  Once set, they'll be stored in localstorage so you don't have to reenter them.
+The default values for these options can be found in `env.json`, and can be modified there directly if you prefer to not have to pass them in via command-line every time.  Additionally, with the exception of `env`, all configuration values can be changed via the Wall interface at any time.  Once set, they'll be stored in localstorage so you don't have to reenter them.
 
 ## Local Development
 
