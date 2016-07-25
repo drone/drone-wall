@@ -79,7 +79,8 @@ module.exports = [ "$rootScope", "$timeout", "$interval", "$filter", "$q",
                         builds = $filter( "orderBy" )( builds, "updatedAt" );
 
                         // Record when builds started to be monitored
-                        ctrl.watchTime = ctrl.watchTime || builds[ 0 ].updatedAt * 1000;
+                        ctrl.watchTime = ctrl.watchTime ||
+                            ( builds.length && builds[ 0 ].updatedAt * 1000 ) || Date.now();
 
                         // Only keep builds that have changed since the last poll
                         builds = $filter( "filter" )( builds, function ( build )

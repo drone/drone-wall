@@ -23,6 +23,14 @@ The default values for most of these options can be found in `env.json`, and can
 
 **Be aware:** supplying these values hard-codes them into the deployed JavaScript files, so providing your Drone token here is suitable *only* when you do not plan to deploy the Drone Wall someplace public. If the `apiroot` and `token` values aren't supplied via the command line build process, they will be asked for in the Wall interface itself.
 
+The Drone Wall will display builds from all repos and branches by default, unless filtered using these options:
+
+* **include**: `[String]` Supply a comma-delimited list of repos (ex. `repo-name`), branches (ex. `repo-name/branch-name`), or branch wildcards (ex. `*/branch-name`) to include ONLY these items on the wall, and implicitly exclude all others.
+
+* **exclude**: `[String]` Supply a comma-delimited list in the same format as the `include` option to exclude repos or branches.  If you set the `exclude` option and not the `include` option, all repos and branches will be implicitly included EXCEPT for those excluded.  If you set the `include` AND `exclude` options, the list will first be filtered to only the inclusion list, and then further filtered by the exclusion list.
+
+* **mainbranch**: `[String]` Defaults to `master`.  When pushes are made to this branch on any of the repos on the Wall, that repo will reflect the status of the build (color, avatar).  Set to `*` to show build status for all pushes regardless of branch (this is the pre-`3.1.0` behavior).
+
 You can further customize the Wall's default appearance with these options:
 
 * **prtimeout**: `[Number]` Defaults to `48`.  The number of hours before an un-merged pull request is hidden in the repo list.  Useful for removing stale pull requests that have been closed without being merged.
@@ -37,7 +45,7 @@ You can further customize the Wall's default appearance with these options:
 
 ## Local Development
 
-The Drone Wall requires Node.js `4.x` and npm `3.x`.
+The Drone Wall requires Node.js `4.x` and npm `3.x` at minimum.
 
 Begin with `npm install`, and then run `npm start` to build the application, start a file-watcher, and run a local server accessible at `localhost:3000`.  You can pass Grunt flags through `npm` (as of `2.0.0`) like this:
 

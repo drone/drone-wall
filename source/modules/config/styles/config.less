@@ -154,7 +154,11 @@
 
         .advanced {
 
-            margin-top: 20px;
+            margin: 20px 0 30px;
+            padding: 20px;
+            border: 1px solid fade( @link, 30% );
+            border-radius: 5px;
+            background-color: fade( @link, 10% );
 
             & > ul {
 
@@ -162,17 +166,45 @@
 
                     position: relative;
 
+                    &::before {
+                        content: @fa-var-cog;
+                        opacity: .2;
+                        position: absolute;
+                        z-index: -1;
+                        left: 0;
+                        top: -1px;
+                        width: 20px;
+                        height: 20px;
+                        line-height: 20px;
+                        text-align: center;
+                        font-size: 20px;
+                        font-family: "FontAwesome";
+                    }
+
                     & + li {
-                        margin-top: 20px;
+                        margin-top: 25px;
+                    }
+
+                    &:nth-child( 3 )
+                    {
+                        padding-bottom: 25px;
+                        border-bottom: 1px solid fade( @shadeDark, 30% )
                     }
 
                     label,
                     p {
                         display: block;
                         margin-bottom: 10px;
+                        margin-left: 28px;
                         font-size: 14px;
                         line-height: 20px;
                         font-weight: 300;
+                    }
+
+                    .instructions {
+                        margin-top: 10px;
+                        padding-left: 11px;
+                        color: fade( @shadeDark, 50% );
                     }
 
                 }
@@ -226,6 +258,17 @@
 
             .theme-light { border-color: @white; font-weight: 400; }
             .theme-dark { border-color: @white; font-weight: 700; }
+
+        }
+
+        .advanced {
+
+            border-color: fade( @shade, 30% );
+            background-color: fade( @shade, 10% );
+
+            .instructions {
+                color: @shadeDark;
+            }
 
         }
 
@@ -306,9 +349,14 @@
 
             .advanced ul li {
 
+                &::before {
+                    display: none;
+                }
+
                 label,
                 p {
                     margin-bottom: 10px;
+                    margin-left: 0;
                     font-weight: 400;
                 }
 

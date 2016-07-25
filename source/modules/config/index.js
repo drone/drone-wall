@@ -36,12 +36,15 @@ angular.module( "Config", [] )
 .factory( "Settings", require( "./services/settings" ) )
 
 .constant( "Defaults", {
-    apiRoot:   "<< apiroot >>",
-    token:     "<< token >>",
-    prTimeout: parseInt( "<< prtimeout >>", 10 ),
-    prMax:     parseInt( "<< prmax >>", 10 ),
-    orgName:   "<< orgname >>",
-    theme:     "<< theme >>"
+    apiRoot:    "<< apiroot >>",
+    token:      "<< token >>",
+    include:    "<< include >>",
+    exclude:    "<< exclude >>",
+    mainBranch: "<< mainbranch >>",
+    prTimeout:  parseInt( "<< prtimeout >>", 10 ),
+    prMax:      parseInt( "<< prmax >>", 10 ),
+    orgName:    "<< orgname >>",
+    theme:      "<< theme >>"
 } );
 
 angular.module( "App" ).requires.push( "Config" );

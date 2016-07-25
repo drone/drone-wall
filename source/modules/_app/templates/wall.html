@@ -78,7 +78,10 @@
                     <i class="fa fa-circle-o-notch fa-spin" ng-if="build.status === 'running'"></i>
                 </div>
                 <div class="name">{{ build.name }}</div>
-                <div class="message">{{ build.message }}</div>
+                <div class="message">
+                    <span class="branch" ng-if="build.branch !== 'master'">{{ build.branch }}</span>
+                    {{ build.message }}
+                </div>
                 <div class="when" ng-if="build.status !== 'pending'">{{ build.startedAt * 1000 | from:wall.now }} ago</div>
                 <div class="when" ng-if="build.status === 'pending'">Build Pending</div>
                 <div class="duration" ng-if="build.finishedAt > 0">

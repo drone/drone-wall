@@ -7,6 +7,8 @@ module.exports = [ "$rootScope", "Settings",
         var repos = [];
 
         var checkMerge = ( build ) => build.event === "push" && build.message.match( /Merge pull request #([0-9]+)/i );
+        var pushToMain = ( build ) => Settings.mainBranch === "*" ||
+                                      build.branch.toUpperCase() === Settings.mainBranch.toUpperCase();
 
         var getPullID = function ( build )
         {
@@ -47,7 +49,7 @@ module.exports = [ "$rootScope", "Settings",
                 owner:     build.owner,
                 pulls:     [],
                 lastMerge: null,
-                developer: checkMerge( build ) ? developer : {}
+                developer: checkMerge( build ) && pushToMain( build ) ? developer : {}
             };
 
             repos.push( newRepo );
@@ -146,7 +148,10 @@ module.exports = [ "$rootScope", "Settings",
                     // Remove merged pull request
                     if( pullIndex !== null )
                     {
-                        currentRepo.developer = currentRepo.pulls[ pullIndex ].developer;
+                        if( pushToMain( build ) )
+                        {
+                            currentRepo.developer = currentRepo.pulls[ pullIndex ].developer;
+                        }
 
                         if( build.status === "running" )
                         {
@@ -160,8 +165,8 @@ module.exports = [ "$rootScope", "Settings",
                     }
                 }
 
-                // Update repo with details from latest non-pull build
-                if( build.status !== "pending" )
+                // Update repo if latest push is from the configured main branch
+                if( pushToMain( build ) && build.status !== "pending" )
                 {
                     if( !currentRepo.lastMerge || build.startedAt >= currentRepo.lastMerge )
                     {

@@ -53,6 +53,39 @@
                 <ul>
 
                     <li>
+                        <label for="include">
+                            A comma-delimited list of repos or branches to include, excluding all others.
+                        </label>
+                        <input type="text" name="include" id="include" ng-model="config.settings.include"
+                            placeholder="default: {{ config.defaults.include || 'including all repos and branches' }}">
+                        <div class="instructions">
+                            ex. repo-name,repo-name/branch-name,*/branch-name
+                        </div>
+                    </li>
+
+                    <li>
+                        <label for="exclude">
+                            Repos or branches to exclude from those already implicitly or explicitly included.
+                        </label>
+                        <input type="text" name="exclude" id="exclude" ng-model="config.settings.exclude"
+                            placeholder="default: {{ config.defaults.exclude || 'excluding no repos or branches' }}">
+                        <div class="instructions">
+                            ex. repo-name,repo-name/branch-name,*/branch-name
+                        </div>
+                    </li>
+
+                    <li>
+                        <label for="mainbranch">
+                            Pushes to this branch will set the color and avatar in the main repo list.
+                        </label>
+                        <input type="text" name="mainbranch" id="mainbranch" ng-model="config.settings.mainBranch"
+                            placeholder="default: {{ config.defaults.mainBranch }}">
+                        <div class="instructions">
+                            ex. branch-name, or * for all branches
+                        </div>
+                    </li>
+
+                    <li>
                         <label for="prtimeout">
                             Pull requests that aren't merged will be hidden after this many hours.
                         </label>

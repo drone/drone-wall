@@ -674,14 +674,28 @@ h1.bar {
             font-weight: 700;
         }
         .message {
+
             transition: color ease .3s;
             margin-right: 15px;
-            padding: 0px 0px 3px 105px;
+            margin-top: -3px;
+            padding: 3px 0px 3px 105px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
             font-size: 18px;
             color: @shadeDark;
+
+            .branch {
+                position: relative;
+                top: -2px;
+                margin-right: 5px;
+                padding: 3px 5px;
+                background-color: @shadeDark;
+                border-radius: 3px;
+                font-size: 12px;
+                color: @white;
+            }
+
         }
         .when {
             transition: color ease .3s;
@@ -848,7 +862,15 @@ h1.bar {
             padding-bottom: 14px;
             font-size: 25px;
         }
-        .message { font-size: 15px; }
+        .message {
+
+            font-size: 15px;
+
+            .branch {
+                top: -1px;
+            }
+
+        }
 
     }
 }
@@ -1032,6 +1054,7 @@ h1.bar {
                 font-size: 18px;
             }
             .message {
+
                 max-height: 28px;
                 margin-right: 10px;
                 padding-bottom: 0;
@@ -1040,6 +1063,14 @@ h1.bar {
                 font-size: 10px;
                 white-space: normal;
                 line-height: 13px;
+
+                .branch {
+                    top: 0;
+                    margin-right: 2px;
+                    padding: 0 3px;
+                    font-size: 10px;
+                }
+
             }
             .when {
                 top: 4px;
