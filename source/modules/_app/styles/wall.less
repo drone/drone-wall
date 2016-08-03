@@ -79,7 +79,7 @@ aside.config {
         height: 10px;
         left: 0;
         bottom: 0;
-        background: linear-gradient( to bottom, rgba( 234, 234, 234, 0 ) 0%, rgba( 234, 234, 234, 1 ) 70% );
+        background: linear-gradient( to bottom, transparent 0%, @bgLight 70% );
     }
 
 }
@@ -223,7 +223,7 @@ aside.config {
                     height: 130px;
                     background-color: @shade;
                     border-radius: 120px;
-                    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.6)
+                    box-shadow: 0px 0px 10px 0px rgba( 0, 0, 0, .6 )
                 }
                 .pull-author {
                     transition: background-color ease .3s;
@@ -787,7 +787,7 @@ h1.bar {
     }
 
     .column:after {
-        background: linear-gradient( to bottom, rgba( 34, 34, 34, 0 ) 0%, rgba( 34, 34, 34, 1 ) 70% );
+        background: linear-gradient( to bottom, transparent 0%, @bgDark 70% );
     }
     h1.bar { background-color: @shadeDark; }
 
