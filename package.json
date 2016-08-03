@@ -59,9 +59,9 @@
     "angular-mocks": "^1.5.0",
     "angular-route": "^1.5.0",
     "angular-toastr": "^1.7.0",
-    "css-reset": "github:vokal/css-reset#50f2692",
+    "css-reset": "github:vokal/css-reset#v1.0.1",
     "font-awesome": "^4.6.3",
     "moment": "^2.11.2",
-    "vokal-ng-api": "github:vokal/vokal-ng-api#e4beffc"
+    "vokal-ng-api": "github:vokal/vokal-ng-api#v6.0.0"
   }
 }
