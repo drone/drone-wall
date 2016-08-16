@@ -98,7 +98,6 @@ module.exports = [ "$rootScope", "$timeout", "$interval", "$filter", "$q",
                         var postParse = function ()
                         {
                             Repos.expirePulls();  // TODO: Hit the GitHub API to remove closed pulls instead
-                            ctrl.updating = false;
                             var i;
 
                             // Scroll the list of repositories when it's long enough
@@ -118,8 +117,8 @@ module.exports = [ "$rootScope", "$timeout", "$interval", "$filter", "$q",
                                         // Repopulate the working array if empty
                                         if( !ctrl.workingRepos.length )
                                         {
-                                            ctrl.workingRepos = ctrl.workingRepos.concat(
-                                                                      $filter( "orderBy" )( ctrl.repos, "name" ) );
+                                            ctrl.workingRepos =
+                                                ctrl.workingRepos.concat( $filter( "orderBy" )( ctrl.repos, "name" ) );
                                         }
 
                                         // Append the next repo to the list
@@ -130,6 +129,8 @@ module.exports = [ "$rootScope", "$timeout", "$interval", "$filter", "$q",
                                         {
                                             ctrl.displayRepos[ i ].order = i;
                                         }
+
+                                        ctrl.updating = false;
 
                                     }, 0 );
 
@@ -145,6 +146,8 @@ module.exports = [ "$rootScope", "$timeout", "$interval", "$filter", "$q",
                                 {
                                     ctrl.displayRepos[ i ].order = i;
                                 }
+
+                                ctrl.updating = false;
                             }
                         };
 
