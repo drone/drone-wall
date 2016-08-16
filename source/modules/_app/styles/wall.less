@@ -593,23 +593,12 @@ h1.bar {
         &.failure { background-color: @failure; color: @white; }
         &.ng-enter {
             transition: all ease 1s;
-            transform: scale( .9, .9 );
+            transform: translateX( -100% );
             opacity: 0;
-            margin-top: -90px;
         }
         &.ng-enter-active {
-            transform: scale(1,1);
+            transform: translateX( 0 );
             opacity: 1;
-            margin-top: 0;
-        }
-        &.ng-leave {
-            transition: all ease 1s;
-            transform: scale(1,1);
-            opacity: 1;
-        }
-        &.ng-leave-active {
-            transform: scale( .9, .9 );
-            opacity: 0;
         }
         .author {
 
