@@ -35,8 +35,7 @@ module.exports = [ "$q", "$filter", "API", "Settings",
                     if( parts.length === 2 )
                     {
                         // Match branches
-                        if( ( parts[ 0 ] === "*" || parts[ 0 ] === build.name ) &&
-                            parts[ 1 ] === build.branch )
+                        if( ( parts[ 0 ] === "*" || parts[ 0 ] === build.name ) && parts[ 1 ] === build.branch )
                         {
                             return filterType;
                         }

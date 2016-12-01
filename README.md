@@ -43,6 +43,10 @@ You can further customize the Wall's default appearance with these options:
 
 * **colors**: `[Object]` The default Wall color scheme is defined in `/source/modules/_app/styles/colors.less`.  You can pass a JSON object with properties that match the LESS variable names (sans the @s) to override some or all of these colors, ala `-colors="{\"success\":\"#00FF00\"}"`.  Note the need to use double-quotes, and escape the innermost ones.  This option's much easier to set via `env.json`, where you can just use an un-escaped object literal.
 
+## Usage Notes
+
+The Drone Wall reads the `ref` and `message` parameters in a build response to determine the pull request that a build belongs to, so your configuration will need to include `ref` and you'll need to merge PRs without customizing the auto-filled message GitHub provides.  See [this issue](https://github.com/drone/drone-wall/issues/45#issuecomment-244519555) for details.  Future updates to drone may make this requirement unnecessary... or may break the wall fundamentally, depending upon whether PR numbers are exposed another way or not.
+
 ## Local Development
 
 The Drone Wall requires Node.js `4.x` and npm `3.x` at minimum.
