@@ -53,11 +53,11 @@
     "protractor": "^2.5.1"
   },
   "dependencies": {
-    "angular": "^1.5.0",
-    "angular-animate": "^1.5.0",
-    "angular-messages": "^1.5.0",
-    "angular-mocks": "^1.5.0",
-    "angular-route": "^1.5.0",
+    "angular": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "angular-messages": "~1.5.0",
+    "angular-mocks": "~1.5.0",
+    "angular-route": "~1.5.0",
     "angular-toastr": "^1.7.0",
     "css-reset": "github:vokal/css-reset#v1.0.1",
     "font-awesome": "^4.6.3",
