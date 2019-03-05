@@ -61,6 +61,7 @@
     "angular-toastr": "^1.7.0",
     "css-reset": "github:vokal/css-reset#v1.0.1",
     "font-awesome": "^4.7.0",
+    "matcher": "^1.1.1",
     "moment": "^2.18.1",
     "vokal-ng-api": "github:vokal/vokal-ng-api#v8.0.0"
   }
