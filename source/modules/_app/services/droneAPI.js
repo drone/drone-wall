@@ -1,5 +1,7 @@
 "use strict";
 
+const matcher = require('matcher');
+
 module.exports = [ "$q", "$filter", "API", "Settings",
 
     function ( $q, $filter, API, Settings )
@@ -35,7 +37,7 @@ module.exports = [ "$q", "$filter", "API", "Settings",
                     if( parts.length === 2 )
                     {
                         // Match branches
-                        if( ( parts[ 0 ] === "*" || parts[ 0 ] === build.name ) && parts[ 1 ] === build.branch )
+                        if( ( matcher.isMatch(build.name, parts[ 0 ]) ) && matcher.isMatch(branch.name, parts[ 1 ]) )
                         {
                             return filterType;
                         }
@@ -43,7 +45,7 @@ module.exports = [ "$q", "$filter", "API", "Settings",
                     else
                     {
                         // Match repos
-                        if( parts[ 0 ] === build.name )
+                        if( matcher.isMatch(build.name, parts[ 0 ]) )
                         {
                             return filterType;
                         }
